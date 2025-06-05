@@ -1,0 +1,164 @@
+@if(mode() == 'top') {
+<header class="absolute inset-x-0 top-0 z-50">
+  <nav
+    class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+    aria-label="Global"
+  >
+    <div class="flex lg:flex-1 items-center">
+      <span class="sr-only">SSPF</span>
+      <img class="h-16 w-auto" src="/images/sspf_logo_small.png" alt="" />
+
+      <span class="title">มูลนิธิส่งเสริมวิทยาศาสตร์บริการ</span>
+    </div>
+    <div class="flex lg:hidden">
+      <button mat-mini-fab (click)="clickMenu.emit(true)">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div class="hidden lg:flex lg:gap-x-12"></div>
+    <div class="hidden lg:flex lg:gap-x-2 lg:flex-1 lg:justify-end">
+      <button mat-button>
+        ติดต่อเรา <mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
+      </button>
+
+      @if(!authStore.isAuthenticated()) {
+      <button mat-button (click)="login()">Login</button>
+      } @else {
+      <button mat-button [matMenuTriggerFor]="userMenu">
+        {{ authStore.profile()?.username }}
+        <mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #userMenu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>import_contacts</mat-icon>
+          <span>จัดการที่อยู่</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>history_edu</mat-icon>
+          <span>ประวัติการอบรม</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>logout</span>
+        </button>
+      </mat-menu>
+
+      }
+    </div>
+  </nav>
+
+  <!-- Mobile menu, show/hide based on menu open state. -->
+  <!--
+  <div class="lg:hidden" role="dialog" aria-modal="true">
+  -->
+  <!-- Background backdrop, show/hide based on slide-over state. -->
+  <!--
+    <div class="fixed inset-0 z-50"></div>
+    <div
+      class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+    >
+      <div class="flex items-center justify-between">
+        <a href="#" class="-m-1.5 p-1.5">
+          <span class="sr-only">Your Company</span>
+          <img
+            class="h-8 w-auto"
+            src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+            alt=""
+          />
+        </a>
+        <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">
+          <span class="sr-only">Close menu</span>
+          <svg
+            class="size-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            aria-hidden="true"
+            data-slot="icon"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="mt-6 flow-root">
+        <div class="-my-6 divide-y divide-gray-500/10">
+          <div class="space-y-2 py-6">
+            <a
+              href="#"
+              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+              >Product</a
+            >
+            <a
+              href="#"
+              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+              >Features</a
+            >
+            <a
+              href="#"
+              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+              >Resources</a
+            >
+            <a
+              href="#"
+              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+              >Company</a
+            >
+          </div>
+          <div class="py-6">
+            <a
+              href="#"
+              class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+              >Log in</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+--></header>
+} @else if (mode() == 'sidenav') {
+
+<mat-nav-list>
+  <mat-list-item>
+    <mat-icon matListItemIcon>folder</mat-icon>
+    <h3 matListItemTitle>ติดต่อเรา</h3>
+  </mat-list-item>
+
+  @if(!authStore.isAuthenticated()) {
+
+  <mat-action-list>
+    <button mat-list-item (click)="login()">
+      <mat-icon matListItemIcon>login</mat-icon>
+      <h3 matListItemTitle>Login</h3>
+    </button>
+  </mat-action-list>
+
+  } @else {
+  <mat-action-list>
+    <button mat-list-item [matMenuTriggerFor]="userMenu">
+      <h3 matListItemTitle>{{ authStore.profile()?.username }}</h3>
+      <mat-icon matListItemIcon iconPositionEnd>arrow_drop_down</mat-icon>
+    </button>
+  </mat-action-list>
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>import_contacts</mat-icon>
+      <span>จัดการที่อยู่</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>history_edu</mat-icon>
+      <span>ประวัติการอบรม</span>
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>logout</span>
+    </button>
+  </mat-menu>
+  }
+</mat-nav-list>
+}

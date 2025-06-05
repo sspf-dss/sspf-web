@@ -1,0 +1,21 @@
+@use "@angular/material" as mat;
+
+$font: var(--mat-sys-display-large-font);
+$size: 20px;
+$weight: 300;
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:host {
+  @include mat.button-overrides(
+    (
+      filled-label-text-font: $font,
+      filled-label-text-weight: $weight,
+      filled-label-text-size: $size,
+    )
+  );
+}
+
+.markdown {
+  ul {
+    list-style-type: disc;
+  }
+}

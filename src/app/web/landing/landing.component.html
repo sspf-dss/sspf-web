@@ -1,0 +1,47 @@
+<h2 class="tracking-tight text-balance text-gray-900 lg:col-span-2 xl:col-auto">
+  หลักสูตรฝึกอบรมสำหรับบุคคลทั่วไป
+</h2>
+
+@if(courses.hasValue()) {
+<table mat-table [dataSource]="courses.value()!">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>ชื่อหลักสูตร</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef>วันที่จัดอบรม</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.startDate | date }}
+      -
+      {{ element.endDate | date }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="number">
+    <th mat-header-cell *matHeaderCellDef>จำนวนที่รับสมัคร</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.participantNumber }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button
+        mat-fab
+        extended
+        class="my-4"
+        (click)="gotoCourse(element.documentId)"
+      >
+        รายละเอียด/สมัคร
+      </button>
+    </td>
+  </ng-container>
+  <tr
+    mat-header-row
+    *matHeaderRowDef="['date', 'name', 'number', 'action']"
+  ></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: ['date', 'name', 'number', 'action']"
+  ></tr>
+</table>
+}

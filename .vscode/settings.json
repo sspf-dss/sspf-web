@@ -1,0 +1,4 @@
+{
+  "tailwindCSS.experimental.configFile": "src/_tailwind.css",
+  "tailwindCSS.lint.invalidConfigPath": "ignore"
+}

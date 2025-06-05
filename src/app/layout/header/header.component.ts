@@ -1,6 +1,6 @@
 import { Component, EventEmitter, inject, input, output } from '@angular/core';
 import { AuthStore } from '../../store/auth.store';
-import { CommonModule } from '@angular/common';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -10,13 +10,12 @@ import { MatListModule } from '@angular/material/list';
 @Component({
   selector: 'app-header',
   imports: [
-    CommonModule,
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
     MatSidenavModule,
-    MatListModule,
-  ],
+    MatListModule
+],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })

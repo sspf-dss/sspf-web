@@ -15,12 +15,12 @@ export class CoursesComponent {
   readonly documentId = input<string>();
 
   courseResource = resource({
-    request: () => this.documentId,
-    loader: async ({ request, abortSignal }) => {
+    params: () => ({ documentId: this.documentId() }),
+    loader: async ({ params, abortSignal }) => {
       return this.strapi
         .client()
         .collection('courses')
-        .findOne(this.documentId()!, {
+        .findOne(params.documentId!, {
           populate: ['course_info', 'instructors', 'topBanner'],
         });
     },

@@ -42,10 +42,10 @@ export const StrapiStore = signalStore(
   })),
   withProps((store) => ({
     _strapiProviderAuthResource: resource({
-      request: store._authStore.token,
-      loader: async (param) => {
+      params: store._authStore.token,
+      loader: async ({ params: token }) => {
         const res = await fetch(
-          `${STRAPI_URL}/api/auth/keycloak/callback?access_token=${param.request}`
+          `${STRAPI_URL}/api/auth/keycloak/callback?access_token=${token}}`
         );
         return await (res.json() as Promise<UserRegistration>);
       },
@@ -65,7 +65,11 @@ export const StrapiStore = signalStore(
       return store._strapiJwt() == undefined ? undefined : true;
     }),
     user: computed(() => {
-      return store._strapiProviderAuthResource.value()?.user;
+      if (store._strapiProviderAuthResource.hasValue()) {
+        return store._strapiProviderAuthResource.value()?.user;
+      } else {
+        return undefined;
+      }
     }),
   })),
   withMethods((store) => ({

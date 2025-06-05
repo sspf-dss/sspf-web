@@ -39,9 +39,9 @@ export const AuthStore = signalStore(
   })),
   withProps((store) => ({
     userProfileResource: resource({
-      request: store.isAuthenticated,
-      loader: (param) => {
-        if (param.request) return store._keycloak.loadUserProfile();
+      params: store.isAuthenticated,
+      loader: ({ params: isAuthenticated }) => {
+        if (isAuthenticated) return store._keycloak.loadUserProfile();
         return Promise.resolve(GUEST_PROFILE);
       },
     }),

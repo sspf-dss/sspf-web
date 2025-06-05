@@ -17,7 +17,7 @@ export class LandingComponent {
   readonly strapi = inject(StrapiStore);
   readonly route = inject(Router);
   courses = resource({
-    loader: async ({ request, abortSignal }) => {
+    loader: async ({ abortSignal }) => {
       return this.strapi
         .client()
         .collection('courses')

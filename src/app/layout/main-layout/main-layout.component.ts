@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, ViewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
@@ -8,13 +8,12 @@ import { MatListModule } from '@angular/material/list';
 @Component({
   selector: 'app-main-layout',
   imports: [
-    CommonModule,
     RouterModule,
     HeaderComponent,
     FooterComponent,
     MatSidenavModule,
-    MatListModule,
-  ],
+    MatListModule
+],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss',
 })

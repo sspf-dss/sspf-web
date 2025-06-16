@@ -46,9 +46,12 @@ export const AuthStore = signalStore(
       },
     }),
   })),
+  withProps((store) => ({
+    authenticated: store._keycloak.authenticated,
+  })),
   withComputed((store) => ({
     hasAuthenticated: computed(() =>
-      store.isAuthenticated() ? true : undefined
+      store.isAuthenticated() ? true : undefined,
     ),
     profile: computed(() => store.userProfileResource.value()),
   })),
@@ -84,5 +87,5 @@ export const AuthStore = signalStore(
     onInit(store) {
       store._updateAuth(store._keycloakEventSignal);
     },
-  })
+  }),
 );

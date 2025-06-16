@@ -30,7 +30,7 @@
     "@strapi/client": "^1.4.0",
     "@strapi/strapi": "^5.15.1",
     "@tailwindcss/postcss": "^4.1.7",
-    "keycloak-angular": "^19.0.2",
+    "keycloak-angular": "^20.0.0",
     "keycloak-js": "^26.2.0",
     "lodash": "^4.17.21",
     "marked": "^15.0.12",
@@ -70,11 +70,6 @@
     "@ngrx/signals": {
       "@angular/common": "$@angular/common",
       "@angular/core": "$@angular/core"
-    },
-    "keycloak-angular": {
-      "@angular/common": "$@angular/common",
-      "@angular/core": "$@angular/core",
-      "@angular/router": "$@angular/router"
     }
   },
   "config": {

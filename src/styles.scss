@@ -2,7 +2,6 @@
 // For more information: https://material.angular.dev/guide/theming
 @use "@angular/material" as mat;
 @use "tailwind";
-@use "./styles/mixins/override-disabled-input" as custom;
 
 $my-theme: (
   color: (

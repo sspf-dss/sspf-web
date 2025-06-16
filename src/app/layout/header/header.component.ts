@@ -14,8 +14,8 @@ import { MatListModule } from '@angular/material/list';
     MatIconModule,
     MatMenuModule,
     MatSidenavModule,
-    MatListModule
-],
+    MatListModule,
+  ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })

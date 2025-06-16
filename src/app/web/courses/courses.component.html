@@ -45,7 +45,16 @@
       </p>
 
       <div class="mt-10">
-        <button mat-flat-button>ลงทะเบียน</button>
+        @if(isFulled()) {
+        <p>เต็มแล้ว</p>
+        } @else {
+        <button
+          mat-flat-button
+          (click)="registerForCourse(course['documentId'])"
+        >
+          ลงทะเบียน
+        </button>
+        }
       </div>
     </div>
 

@@ -20,16 +20,18 @@
             "outputPath": "dist/sspf-web",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js",
-              "@angular/localize/init"
-            ],
+            "polyfills": ["zone.js", "@angular/localize/init"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/ngx-extended-pdf-viewer/assets/",
+                "output": "assets"
               }
             ],
             "styles": ["src/styles.scss"],
@@ -92,6 +94,33 @@
             ],
             "styles": ["src/styles.scss"],
             "scripts": []
+          }
+        }
+      }
+    },
+    "ngx-drawer": {
+      "projectType": "library",
+      "root": "projects/ngx-drawer",
+      "sourceRoot": "projects/ngx-drawer/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-drawer/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-drawer/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/ngx-drawer/tsconfig.spec.json",
+            "polyfills": ["zone.js", "zone.js/testing"]
           }
         }
       }

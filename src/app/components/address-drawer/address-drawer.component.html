@@ -1,0 +1,183 @@
+<ng-template #header>{{ headerTxt() }} </ng-template>
+
+<!-- 🔵 Loading bar -->
+<mat-progress-bar
+  *ngIf="isLoading()"
+  mode="indeterminate"
+  color="primary"
+></mat-progress-bar>
+
+@if (!editPanelOpen) {
+  <!-- ➕ Add New -->
+  <div class="flex flex-col">
+    <div class="mb-2">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="startCreate()"
+        class="add-button"
+      >
+        Add New Address
+      </button>
+    </div>
+
+    <div>
+      <mat-radio-group
+        [(ngModel)]="selectedAddressId"
+        class="space-y-2"
+        (change)="onAddressRadioChange($event.value)"
+      >
+        <mat-radio-button
+          *ngFor="let addr of addressResource.value()"
+          [value]="addr.documentId"
+          [ngClass]="{ 'bg-blue-100': selectedAddressId === addr.documentId }"
+          class="flex p-4 rounded items-start hover:bg-blue-100"
+        >
+          <div class="w-72 flex items-start justify-between">
+            <div class="flex-grow">
+              <app-address-card [address]="addr"></app-address-card>
+            </div>
+            <div class="flex flex-col gap-2 items-center ml-4 text-gray-60">
+              <button mat-icon-button (click)="startEdit(addr)" color="primary">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                (click)="deleteAddress(addr.documentId!)"
+                color="warn"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+} @else {
+  <!-- 🧾 Inline Form -->
+  <div *ngIf="editingAddress" class="inline-form">
+    <form [formGroup]="addressForm">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>ชื่อบริษัท</mat-label>
+        <input matInput formControlName="companyName" />
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>หมายเลขประจำตัวผู้เสียภาษี</mat-label>
+        <input matInput formControlName="taxId" />
+        <mat-error *ngIf="addressForm.get('taxId')?.invalid">
+          @if (addressForm.get("taxId")?.hasError("required")) {
+            Required
+          }
+          @if (addressForm.get("taxId")?.hasError("min")) {
+            min
+          }
+          @if (addressForm.get("taxId")?.hasError("max")) {
+            max
+          }
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>ชื่อผู้ติดต่อ</mat-label>
+        <input matInput formControlName="contactName" />
+        <mat-error *ngIf="addressForm.get('contactName')?.hasError('required')"
+          >Required</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>เบอร์โทรศัพท์</mat-label>
+        <input matInput formControlName="phone" />
+        <mat-error *ngIf="addressForm.get('phone')?.hasError('required')"
+          >Required</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>ที่อยู่บรรทัดแรก</mat-label>
+        <input matInput formControlName="line1" />
+        <mat-error *ngIf="addressForm.get('name')?.hasError('required')"
+          >Required</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>ที่อยู่บรรทัดถัดไป (ถ้ามี)</mat-label>
+        <input matInput formControlName="line2" />
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>จังหวัด</mat-label>
+        <mat-select
+          formControlName="province"
+          (selectionChange)="onProvinceChange($event.value)"
+        >
+          <mat-option
+            *ngFor="let p of provinceResource.value()"
+            [value]="p.documentId"
+            >{{ p.nameTh }}</mat-option
+          >
+        </mat-select>
+        <mat-error *ngIf="addressForm.get('province')?.hasError('required')"
+          >Required</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field
+        class="full-width"
+        appearance="fill"
+        *ngIf="districtResource.hasValue()"
+      >
+        <mat-label>อำเภอ/เขต</mat-label>
+        <mat-select
+          formControlName="district"
+          (selectionChange)="onDistrictChange($event.value)"
+        >
+          <mat-option
+            *ngFor="let d of districtResource.value()"
+            [value]="d.documentId"
+            >{{ d.nameTh }}</mat-option
+          >
+        </mat-select>
+        <mat-error *ngIf="addressForm.get('district')?.hasError('required')"
+          >Required</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field
+        class="full-width"
+        appearance="fill"
+        *ngIf="subdistrictResource.hasValue()"
+      >
+        <mat-label>ตำบล/แขวง</mat-label>
+        <mat-select formControlName="subdistrict">
+          <mat-option
+            *ngFor="let s of subdistrictResource.value()"
+            [value]="s.documentId"
+            >{{ s.nameTh }}</mat-option
+          >
+        </mat-select>
+        <mat-error *ngIf="addressForm.get('subdistrict')?.hasError('required')"
+          >Required</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>รหัสไปรษณีย์</mat-label>
+        <input matInput formControlName="zip" />
+        <mat-error *ngIf="addressForm.get('zip')?.hasError('required')"
+          >Required</mat-error
+        >
+      </mat-form-field>
+    </form>
+
+    <div class="actions">
+      <button mat-button (click)="cancelEdit()">Cancel</button>
+      <button mat-flat-button color="primary" (click)="saveAddress()">
+        Save
+      </button>
+    </div>
+  </div>
+}

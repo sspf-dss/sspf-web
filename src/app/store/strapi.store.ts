@@ -8,23 +8,26 @@ import {
   withState,
 } from '@ngrx/signals';
 import { AuthStore } from './auth.store';
-import { computed, effect, inject, resource } from '@angular/core';
+import { computed, effect, inject, resource, signal } from '@angular/core';
 import { paths } from '../lib/openapi/sspf-cms';
 import createClient, { Client, Middleware } from 'openapi-fetch';
-import { UserRegistration } from '../lib/openapi/sspf-cms-type';
 import { strapi, StrapiClient } from '@strapi/client';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 type StrapiState = {
   client1: Client<paths>;
   client: StrapiClient;
+  isReady: boolean;
 };
 
-const STRAPI_URL = 'http://localhost:1337';
+const STRAPI_URL = 'http://localhost:1338';
+
 const BASE_URL = `${STRAPI_URL}/api`;
 
 const initialState: StrapiState = {
   client1: createClient<paths>({ baseUrl: BASE_URL }),
   client: strapi({ baseURL: BASE_URL }),
+  isReady: false,
 };
 
 export const StrapiStore = signalStore(
@@ -40,14 +43,17 @@ export const StrapiStore = signalStore(
       },
     } as Middleware,
   })),
+  withProps(({ isReady }) => ({
+    isReady$: toObservable(isReady),
+  })),
   withProps((store) => ({
     _strapiProviderAuthResource: resource({
       params: store._authStore.token,
       loader: async ({ params: token }) => {
         const res = await fetch(
-          `${STRAPI_URL}/api/auth/keycloak/callback?access_token=${token}}`
+          `${STRAPI_URL}/api/auth/keycloak/callback?access_token=${token}`,
         );
-        return await (res.json() as Promise<UserRegistration>);
+        return await res.json();
       },
     }),
   })),
@@ -86,11 +92,15 @@ export const StrapiStore = signalStore(
               baseURL: BASE_URL,
               headers: { Authorization: `Bearer ${store._strapiJwt()}` },
             }),
+            isReady: true,
           });
         } else {
-          patchState(store, { client: strapi({ baseURL: BASE_URL }) });
+          patchState(store, {
+            client: strapi({ baseURL: BASE_URL }),
+            isReady: false,
+          });
         }
       });
     },
-  }))
+  })),
 );

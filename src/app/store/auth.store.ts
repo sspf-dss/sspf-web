@@ -16,7 +16,7 @@ import {
   ReadyArgs,
   typeEventArgs,
 } from 'keycloak-angular';
-import Keycloak, { KeycloakProfile } from 'keycloak-js';
+import Keycloak, { KeycloakLoginOptions, KeycloakProfile } from 'keycloak-js';
 
 type AuthState = {
   isAuthenticated: boolean;
@@ -53,8 +53,8 @@ export const AuthStore = signalStore(
     profile: computed(() => store.userProfileResource.value()),
   })),
   withMethods((store) => ({
-    login: () => {
-      store._keycloak.login();
+    login: (options?: KeycloakLoginOptions) => {
+      store._keycloak.login(options);
     },
     logout: () => {
       store._keycloak.logout();

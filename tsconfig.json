@@ -9,6 +9,10 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "file-upload": ["./dist/file-upload"],
+      "ngx-drawer": ["./dist/ngx-drawer"]
+    },
     "skipLibCheck": true,
     "isolatedModules": true,
     "esModuleInterop": true,
@@ -24,5 +28,6 @@
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "references": []
 }

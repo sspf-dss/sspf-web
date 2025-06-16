@@ -100,6 +100,38 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/districts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["get/districts"];
+        put?: never;
+        post: operations["post/districts"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/districts/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["get/districts/{id}"];
+        put: operations["put/districts/{id}"];
+        post?: never;
+        delete: operations["delete/districts/{id}"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/instructors": {
         parameters: {
             query?: never;
@@ -132,6 +164,38 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/provinces": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["get/provinces"];
+        put?: never;
+        post: operations["post/provinces"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/provinces/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["get/provinces/{id}"];
+        put: operations["put/provinces/{id}"];
+        post?: never;
+        delete: operations["delete/provinces/{id}"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/registrations": {
         parameters: {
             query?: never;
@@ -159,6 +223,38 @@ export interface paths {
         put: operations["put/registrations/{id}"];
         post?: never;
         delete: operations["delete/registrations/{id}"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/subdistricts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["get/subdistricts"];
+        put?: never;
+        post: operations["post/subdistricts"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/subdistricts/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["get/subdistricts/{id}"];
+        put: operations["put/subdistricts/{id}"];
+        post?: never;
+        delete: operations["delete/subdistricts/{id}"];
         options?: never;
         head?: never;
         patch?: never;
@@ -1580,18 +1676,21 @@ export interface components {
         };
         AddressRequest: {
             data: {
+                companyName?: string;
+                contactName?: string;
+                phone?: string;
+                taxId?: string;
                 line1?: string;
                 line2?: string;
-                taxId?: string;
-                companyName?: string;
-                contaceName?: string;
-                subDistrice?: string;
-                district?: string;
-                province?: string;
                 zip?: string;
                 /** @example string or id */
+                province?: number | string;
+                /** @example string or id */
+                district?: number | string;
+                /** @example string or id */
+                subdistrict?: number | string;
+                /** @example string or id */
                 users_permissions_user?: number | string;
-                title?: string;
                 locale?: string;
                 localizations?: (number | string)[];
             };
@@ -1610,37 +1709,36 @@ export interface components {
         Address: {
             id?: number;
             documentId?: string;
+            companyName?: string;
+            contactName?: string;
+            phone?: string;
+            taxId?: string;
             line1?: string;
             line2?: string;
-            taxId?: string;
-            companyName?: string;
-            contaceName?: string;
-            subDistrice?: string;
-            district?: string;
-            province?: string;
             zip?: string;
-            users_permissions_user?: {
+            province?: {
                 id?: number;
                 documentId?: string;
-                username?: string;
-                /** Format: email */
-                email?: string;
-                provider?: string;
-                resetPasswordToken?: string;
-                confirmationToken?: string;
-                confirmed?: boolean;
-                blocked?: boolean;
-                role?: {
+                code?: number;
+                nameTh?: string;
+                nameEn?: string;
+                districts?: {
                     id?: number;
                     documentId?: string;
-                    name?: string;
-                    description?: string;
-                    type?: string;
-                    permissions?: {
+                    code?: number;
+                    nameTh?: string;
+                    nameEn?: string;
+                    province?: {
                         id?: number;
                         documentId?: string;
-                        action?: string;
-                        role?: {
+                    };
+                    subdistricts?: {
+                        id?: number;
+                        documentId?: string;
+                        code?: number;
+                        nameTh?: string;
+                        nameEn?: string;
+                        district?: {
                             id?: number;
                             documentId?: string;
                         };
@@ -1755,47 +1853,6 @@ export interface components {
                             documentId?: string;
                         }[];
                     }[];
-                    users?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                    /** Format: date-time */
-                    createdAt?: string;
-                    /** Format: date-time */
-                    updatedAt?: string;
-                    /** Format: date-time */
-                    publishedAt?: string;
-                    createdBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    updatedBy?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    locale?: string;
-                    localizations?: {
-                        id?: number;
-                        documentId?: string;
-                    }[];
-                };
-                addresses?: {
-                    id?: number;
-                    documentId?: string;
-                    line1?: string;
-                    line2?: string;
-                    taxId?: string;
-                    companyName?: string;
-                    contaceName?: string;
-                    subDistrice?: string;
-                    district?: string;
-                    province?: string;
-                    zip?: string;
-                    users_permissions_user?: {
-                        id?: number;
-                        documentId?: string;
-                    };
-                    title?: string;
                     /** Format: date-time */
                     createdAt?: string;
                     /** Format: date-time */
@@ -1836,7 +1893,149 @@ export interface components {
                     documentId?: string;
                 }[];
             };
-            title?: string;
+            district?: {
+                id?: number;
+                documentId?: string;
+            };
+            subdistrict?: {
+                id?: number;
+                documentId?: string;
+            };
+            users_permissions_user?: {
+                id?: number;
+                documentId?: string;
+                username?: string;
+                /** Format: email */
+                email?: string;
+                provider?: string;
+                resetPasswordToken?: string;
+                confirmationToken?: string;
+                confirmed?: boolean;
+                blocked?: boolean;
+                role?: {
+                    id?: number;
+                    documentId?: string;
+                    name?: string;
+                    description?: string;
+                    type?: string;
+                    permissions?: {
+                        id?: number;
+                        documentId?: string;
+                        action?: string;
+                        role?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        /** Format: date-time */
+                        createdAt?: string;
+                        /** Format: date-time */
+                        updatedAt?: string;
+                        /** Format: date-time */
+                        publishedAt?: string;
+                        createdBy?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        updatedBy?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        locale?: string;
+                        localizations?: {
+                            id?: number;
+                            documentId?: string;
+                        }[];
+                    }[];
+                    users?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                    /** Format: date-time */
+                    createdAt?: string;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    /** Format: date-time */
+                    publishedAt?: string;
+                    createdBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    updatedBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    locale?: string;
+                    localizations?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                };
+                addresses?: {
+                    id?: number;
+                    documentId?: string;
+                    companyName?: string;
+                    contactName?: string;
+                    phone?: string;
+                    taxId?: string;
+                    line1?: string;
+                    line2?: string;
+                    zip?: string;
+                    province?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    district?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    subdistrict?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    users_permissions_user?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    /** Format: date-time */
+                    createdAt?: string;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    /** Format: date-time */
+                    publishedAt?: string;
+                    createdBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    updatedBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    locale?: string;
+                    localizations?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                }[];
+                /** Format: date-time */
+                createdAt?: string;
+                /** Format: date-time */
+                updatedAt?: string;
+                /** Format: date-time */
+                publishedAt?: string;
+                createdBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                updatedBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                locale?: string;
+                localizations?: {
+                    id?: number;
+                    documentId?: string;
+                }[];
+            };
             /** Format: date-time */
             createdAt?: string;
             /** Format: date-time */
@@ -1880,6 +2079,10 @@ export interface components {
                 registrations?: (number | string)[];
                 /** @example string or id */
                 course_info?: number | string;
+                isOnline?: boolean;
+                venue?: string;
+                /** @example string or id */
+                topBanner?: number | string;
                 locale?: string;
                 localizations?: (number | string)[];
             };
@@ -2074,6 +2277,136 @@ export interface components {
                         objective?: unknown;
                         requirement?: unknown;
                         outline?: unknown;
+                        descriptionMD?: string;
+                        objectiveMD?: string;
+                        requirementMD?: string;
+                        outlineMD?: string;
+                        /** Format: date-time */
+                        createdAt?: string;
+                        /** Format: date-time */
+                        updatedAt?: string;
+                        /** Format: date-time */
+                        publishedAt?: string;
+                        createdBy?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        updatedBy?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        locale?: string;
+                        localizations?: {
+                            id?: number;
+                            documentId?: string;
+                        }[];
+                    };
+                    isOnline?: boolean;
+                    venue?: string;
+                    topBanner?: {
+                        id?: number;
+                        documentId?: string;
+                        name?: string;
+                        alternativeText?: string;
+                        caption?: string;
+                        width?: number;
+                        height?: number;
+                        formats?: unknown;
+                        hash?: string;
+                        ext?: string;
+                        mime?: string;
+                        /** Format: float */
+                        size?: number;
+                        url?: string;
+                        previewUrl?: string;
+                        provider?: string;
+                        provider_metadata?: unknown;
+                        related?: {
+                            id?: number;
+                            documentId?: string;
+                        }[];
+                        folder?: {
+                            id?: number;
+                            documentId?: string;
+                            name?: string;
+                            pathId?: number;
+                            parent?: {
+                                id?: number;
+                                documentId?: string;
+                            };
+                            children?: {
+                                id?: number;
+                                documentId?: string;
+                            }[];
+                            files?: {
+                                id?: number;
+                                documentId?: string;
+                                name?: string;
+                                alternativeText?: string;
+                                caption?: string;
+                                width?: number;
+                                height?: number;
+                                formats?: unknown;
+                                hash?: string;
+                                ext?: string;
+                                mime?: string;
+                                /** Format: float */
+                                size?: number;
+                                url?: string;
+                                previewUrl?: string;
+                                provider?: string;
+                                provider_metadata?: unknown;
+                                related?: {
+                                    id?: number;
+                                    documentId?: string;
+                                }[];
+                                folder?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                folderPath?: string;
+                                /** Format: date-time */
+                                createdAt?: string;
+                                /** Format: date-time */
+                                updatedAt?: string;
+                                /** Format: date-time */
+                                publishedAt?: string;
+                                createdBy?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                updatedBy?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                locale?: string;
+                                localizations?: {
+                                    id?: number;
+                                    documentId?: string;
+                                }[];
+                            }[];
+                            path?: string;
+                            /** Format: date-time */
+                            createdAt?: string;
+                            /** Format: date-time */
+                            updatedAt?: string;
+                            /** Format: date-time */
+                            publishedAt?: string;
+                            createdBy?: {
+                                id?: number;
+                                documentId?: string;
+                            };
+                            updatedBy?: {
+                                id?: number;
+                                documentId?: string;
+                            };
+                            locale?: string;
+                            localizations?: {
+                                id?: number;
+                                documentId?: string;
+                            }[];
+                        };
+                        folderPath?: string;
                         /** Format: date-time */
                         createdAt?: string;
                         /** Format: date-time */
@@ -2114,7 +2447,7 @@ export interface components {
                         documentId?: string;
                     }[];
                 };
-                users_permissions_user?: {
+                user?: {
                     id?: number;
                     documentId?: string;
                     username?: string;
@@ -2186,20 +2519,111 @@ export interface components {
                     addresses?: {
                         id?: number;
                         documentId?: string;
+                        companyName?: string;
+                        contactName?: string;
+                        phone?: string;
+                        taxId?: string;
                         line1?: string;
                         line2?: string;
-                        taxId?: string;
-                        companyName?: string;
-                        contaceName?: string;
-                        subDistrice?: string;
-                        district?: string;
-                        province?: string;
                         zip?: string;
+                        province?: {
+                            id?: number;
+                            documentId?: string;
+                            code?: number;
+                            nameTh?: string;
+                            nameEn?: string;
+                            districts?: {
+                                id?: number;
+                                documentId?: string;
+                                code?: number;
+                                nameTh?: string;
+                                nameEn?: string;
+                                province?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                subdistricts?: {
+                                    id?: number;
+                                    documentId?: string;
+                                    code?: number;
+                                    nameTh?: string;
+                                    nameEn?: string;
+                                    district?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    };
+                                    /** Format: date-time */
+                                    createdAt?: string;
+                                    /** Format: date-time */
+                                    updatedAt?: string;
+                                    /** Format: date-time */
+                                    publishedAt?: string;
+                                    createdBy?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    };
+                                    updatedBy?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    };
+                                    locale?: string;
+                                    localizations?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    }[];
+                                }[];
+                                /** Format: date-time */
+                                createdAt?: string;
+                                /** Format: date-time */
+                                updatedAt?: string;
+                                /** Format: date-time */
+                                publishedAt?: string;
+                                createdBy?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                updatedBy?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                locale?: string;
+                                localizations?: {
+                                    id?: number;
+                                    documentId?: string;
+                                }[];
+                            }[];
+                            /** Format: date-time */
+                            createdAt?: string;
+                            /** Format: date-time */
+                            updatedAt?: string;
+                            /** Format: date-time */
+                            publishedAt?: string;
+                            createdBy?: {
+                                id?: number;
+                                documentId?: string;
+                            };
+                            updatedBy?: {
+                                id?: number;
+                                documentId?: string;
+                            };
+                            locale?: string;
+                            localizations?: {
+                                id?: number;
+                                documentId?: string;
+                            }[];
+                        };
+                        district?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        subdistrict?: {
+                            id?: number;
+                            documentId?: string;
+                        };
                         users_permissions_user?: {
                             id?: number;
                             documentId?: string;
                         };
-                        title?: string;
                         /** Format: date-time */
                         createdAt?: string;
                         /** Format: date-time */
@@ -2241,7 +2665,7 @@ export interface components {
                     }[];
                 };
                 /** Format: date-time */
-                registedDate?: string;
+                registerDate?: string;
                 /** @enum {string} */
                 registerStatus?: "REGISTERED" | "PAYMENT_PENDING" | "PAYMENT_RECEIVED" | "ENROLLED" | "WAIT_LIST";
                 uploads?: {
@@ -2269,83 +2693,6 @@ export interface components {
                     folder?: {
                         id?: number;
                         documentId?: string;
-                        name?: string;
-                        pathId?: number;
-                        parent?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        children?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
-                        files?: {
-                            id?: number;
-                            documentId?: string;
-                            name?: string;
-                            alternativeText?: string;
-                            caption?: string;
-                            width?: number;
-                            height?: number;
-                            formats?: unknown;
-                            hash?: string;
-                            ext?: string;
-                            mime?: string;
-                            /** Format: float */
-                            size?: number;
-                            url?: string;
-                            previewUrl?: string;
-                            provider?: string;
-                            provider_metadata?: unknown;
-                            related?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                            folder?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            folderPath?: string;
-                            /** Format: date-time */
-                            createdAt?: string;
-                            /** Format: date-time */
-                            updatedAt?: string;
-                            /** Format: date-time */
-                            publishedAt?: string;
-                            createdBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            updatedBy?: {
-                                id?: number;
-                                documentId?: string;
-                            };
-                            locale?: string;
-                            localizations?: {
-                                id?: number;
-                                documentId?: string;
-                            }[];
-                        }[];
-                        path?: string;
-                        /** Format: date-time */
-                        createdAt?: string;
-                        /** Format: date-time */
-                        updatedAt?: string;
-                        /** Format: date-time */
-                        publishedAt?: string;
-                        createdBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        updatedBy?: {
-                            id?: number;
-                            documentId?: string;
-                        };
-                        locale?: string;
-                        localizations?: {
-                            id?: number;
-                            documentId?: string;
-                        }[];
                     };
                     folderPath?: string;
                     /** Format: date-time */
@@ -2415,6 +2762,15 @@ export interface components {
                         documentId?: string;
                     }[];
                 };
+                receiptAddress?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                certificateAddress?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                nameOnCertificate?: string;
                 /** Format: date-time */
                 createdAt?: string;
                 /** Format: date-time */
@@ -2438,6 +2794,55 @@ export interface components {
             course_info?: {
                 id?: number;
                 documentId?: string;
+            };
+            isOnline?: boolean;
+            venue?: string;
+            topBanner?: {
+                id?: number;
+                documentId?: string;
+                name?: string;
+                alternativeText?: string;
+                caption?: string;
+                width?: number;
+                height?: number;
+                formats?: unknown;
+                hash?: string;
+                ext?: string;
+                mime?: string;
+                /** Format: float */
+                size?: number;
+                url?: string;
+                previewUrl?: string;
+                provider?: string;
+                provider_metadata?: unknown;
+                related?: {
+                    id?: number;
+                    documentId?: string;
+                }[];
+                folder?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                folderPath?: string;
+                /** Format: date-time */
+                createdAt?: string;
+                /** Format: date-time */
+                updatedAt?: string;
+                /** Format: date-time */
+                publishedAt?: string;
+                createdBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                updatedBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                locale?: string;
+                localizations?: {
+                    id?: number;
+                    documentId?: string;
+                }[];
             };
             /** Format: date-time */
             createdAt?: string;
@@ -2471,6 +2876,10 @@ export interface components {
                 objective?: unknown;
                 requirement?: unknown;
                 outline?: unknown;
+                descriptionMD?: string;
+                objectiveMD?: string;
+                requirementMD?: string;
+                outlineMD?: string;
                 locale?: string;
                 localizations?: (number | string)[];
             };
@@ -2637,7 +3046,7 @@ export interface components {
                         id?: number;
                         documentId?: string;
                     };
-                    users_permissions_user?: {
+                    user?: {
                         id?: number;
                         documentId?: string;
                         username?: string;
@@ -2709,20 +3118,111 @@ export interface components {
                         addresses?: {
                             id?: number;
                             documentId?: string;
+                            companyName?: string;
+                            contactName?: string;
+                            phone?: string;
+                            taxId?: string;
                             line1?: string;
                             line2?: string;
-                            taxId?: string;
-                            companyName?: string;
-                            contaceName?: string;
-                            subDistrice?: string;
-                            district?: string;
-                            province?: string;
                             zip?: string;
+                            province?: {
+                                id?: number;
+                                documentId?: string;
+                                code?: number;
+                                nameTh?: string;
+                                nameEn?: string;
+                                districts?: {
+                                    id?: number;
+                                    documentId?: string;
+                                    code?: number;
+                                    nameTh?: string;
+                                    nameEn?: string;
+                                    province?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    };
+                                    subdistricts?: {
+                                        id?: number;
+                                        documentId?: string;
+                                        code?: number;
+                                        nameTh?: string;
+                                        nameEn?: string;
+                                        district?: {
+                                            id?: number;
+                                            documentId?: string;
+                                        };
+                                        /** Format: date-time */
+                                        createdAt?: string;
+                                        /** Format: date-time */
+                                        updatedAt?: string;
+                                        /** Format: date-time */
+                                        publishedAt?: string;
+                                        createdBy?: {
+                                            id?: number;
+                                            documentId?: string;
+                                        };
+                                        updatedBy?: {
+                                            id?: number;
+                                            documentId?: string;
+                                        };
+                                        locale?: string;
+                                        localizations?: {
+                                            id?: number;
+                                            documentId?: string;
+                                        }[];
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt?: string;
+                                    /** Format: date-time */
+                                    updatedAt?: string;
+                                    /** Format: date-time */
+                                    publishedAt?: string;
+                                    createdBy?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    };
+                                    updatedBy?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    };
+                                    locale?: string;
+                                    localizations?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    }[];
+                                }[];
+                                /** Format: date-time */
+                                createdAt?: string;
+                                /** Format: date-time */
+                                updatedAt?: string;
+                                /** Format: date-time */
+                                publishedAt?: string;
+                                createdBy?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                updatedBy?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                locale?: string;
+                                localizations?: {
+                                    id?: number;
+                                    documentId?: string;
+                                }[];
+                            };
+                            district?: {
+                                id?: number;
+                                documentId?: string;
+                            };
+                            subdistrict?: {
+                                id?: number;
+                                documentId?: string;
+                            };
                             users_permissions_user?: {
                                 id?: number;
                                 documentId?: string;
                             };
-                            title?: string;
                             /** Format: date-time */
                             createdAt?: string;
                             /** Format: date-time */
@@ -2764,7 +3264,7 @@ export interface components {
                         }[];
                     };
                     /** Format: date-time */
-                    registedDate?: string;
+                    registerDate?: string;
                     /** @enum {string} */
                     registerStatus?: "REGISTERED" | "PAYMENT_PENDING" | "PAYMENT_RECEIVED" | "ENROLLED" | "WAIT_LIST";
                     uploads?: {
@@ -2938,6 +3438,15 @@ export interface components {
                             documentId?: string;
                         }[];
                     };
+                    receiptAddress?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    certificateAddress?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    nameOnCertificate?: string;
                     /** Format: date-time */
                     createdAt?: string;
                     /** Format: date-time */
@@ -2969,6 +3478,59 @@ export interface components {
                     objective?: unknown;
                     requirement?: unknown;
                     outline?: unknown;
+                    descriptionMD?: string;
+                    objectiveMD?: string;
+                    requirementMD?: string;
+                    outlineMD?: string;
+                    /** Format: date-time */
+                    createdAt?: string;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    /** Format: date-time */
+                    publishedAt?: string;
+                    createdBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    updatedBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    locale?: string;
+                    localizations?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                };
+                isOnline?: boolean;
+                venue?: string;
+                topBanner?: {
+                    id?: number;
+                    documentId?: string;
+                    name?: string;
+                    alternativeText?: string;
+                    caption?: string;
+                    width?: number;
+                    height?: number;
+                    formats?: unknown;
+                    hash?: string;
+                    ext?: string;
+                    mime?: string;
+                    /** Format: float */
+                    size?: number;
+                    url?: string;
+                    previewUrl?: string;
+                    provider?: string;
+                    provider_metadata?: unknown;
+                    related?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                    folder?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    folderPath?: string;
                     /** Format: date-time */
                     createdAt?: string;
                     /** Format: date-time */
@@ -3013,6 +3575,10 @@ export interface components {
             objective?: unknown;
             requirement?: unknown;
             outline?: unknown;
+            descriptionMD?: string;
+            objectiveMD?: string;
+            requirementMD?: string;
+            outlineMD?: string;
             /** Format: date-time */
             createdAt?: string;
             /** Format: date-time */
@@ -3035,6 +3601,240 @@ export interface components {
         };
         CourseInfoResponse: {
             data?: components["schemas"]["CourseInfo"];
+            meta?: Record<string, never>;
+        };
+        DistrictRequest: {
+            data: {
+                code?: number;
+                nameTh?: string;
+                nameEn?: string;
+                /** @example string or id */
+                province?: number | string;
+                subdistricts?: (number | string)[];
+                locale?: string;
+                localizations?: (number | string)[];
+            };
+        };
+        DistrictListResponse: {
+            data?: components["schemas"]["District"][];
+            meta?: {
+                pagination?: {
+                    page?: number;
+                    pageSize?: number;
+                    pageCount?: number;
+                    total?: number;
+                };
+            };
+        };
+        District: {
+            id?: number;
+            documentId?: string;
+            code?: number;
+            nameTh?: string;
+            nameEn?: string;
+            province?: {
+                id?: number;
+                documentId?: string;
+                code?: number;
+                nameTh?: string;
+                nameEn?: string;
+                districts?: {
+                    id?: number;
+                    documentId?: string;
+                    code?: number;
+                    nameTh?: string;
+                    nameEn?: string;
+                    province?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    subdistricts?: {
+                        id?: number;
+                        documentId?: string;
+                        code?: number;
+                        nameTh?: string;
+                        nameEn?: string;
+                        district?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        /** Format: date-time */
+                        createdAt?: string;
+                        /** Format: date-time */
+                        updatedAt?: string;
+                        /** Format: date-time */
+                        publishedAt?: string;
+                        createdBy?: {
+                            id?: number;
+                            documentId?: string;
+                            firstname?: string;
+                            lastname?: string;
+                            username?: string;
+                            /** Format: email */
+                            email?: string;
+                            resetPasswordToken?: string;
+                            registrationToken?: string;
+                            isActive?: boolean;
+                            roles?: {
+                                id?: number;
+                                documentId?: string;
+                                name?: string;
+                                code?: string;
+                                description?: string;
+                                users?: {
+                                    id?: number;
+                                    documentId?: string;
+                                }[];
+                                permissions?: {
+                                    id?: number;
+                                    documentId?: string;
+                                    action?: string;
+                                    actionParameters?: unknown;
+                                    subject?: string;
+                                    properties?: unknown;
+                                    conditions?: unknown;
+                                    role?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    };
+                                    /** Format: date-time */
+                                    createdAt?: string;
+                                    /** Format: date-time */
+                                    updatedAt?: string;
+                                    /** Format: date-time */
+                                    publishedAt?: string;
+                                    createdBy?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    };
+                                    updatedBy?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    };
+                                    locale?: string;
+                                    localizations?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    }[];
+                                }[];
+                                /** Format: date-time */
+                                createdAt?: string;
+                                /** Format: date-time */
+                                updatedAt?: string;
+                                /** Format: date-time */
+                                publishedAt?: string;
+                                createdBy?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                updatedBy?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                locale?: string;
+                                localizations?: {
+                                    id?: number;
+                                    documentId?: string;
+                                }[];
+                            }[];
+                            blocked?: boolean;
+                            preferedLanguage?: string;
+                            /** Format: date-time */
+                            createdAt?: string;
+                            /** Format: date-time */
+                            updatedAt?: string;
+                            /** Format: date-time */
+                            publishedAt?: string;
+                            createdBy?: {
+                                id?: number;
+                                documentId?: string;
+                            };
+                            updatedBy?: {
+                                id?: number;
+                                documentId?: string;
+                            };
+                            locale?: string;
+                            localizations?: {
+                                id?: number;
+                                documentId?: string;
+                            }[];
+                        };
+                        updatedBy?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        locale?: string;
+                        localizations?: {
+                            id?: number;
+                            documentId?: string;
+                        }[];
+                    }[];
+                    /** Format: date-time */
+                    createdAt?: string;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    /** Format: date-time */
+                    publishedAt?: string;
+                    createdBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    updatedBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    locale?: string;
+                    localizations?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                }[];
+                /** Format: date-time */
+                createdAt?: string;
+                /** Format: date-time */
+                updatedAt?: string;
+                /** Format: date-time */
+                publishedAt?: string;
+                createdBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                updatedBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                locale?: string;
+                localizations?: {
+                    id?: number;
+                    documentId?: string;
+                }[];
+            };
+            subdistricts?: {
+                id?: number;
+                documentId?: string;
+            }[];
+            /** Format: date-time */
+            createdAt?: string;
+            /** Format: date-time */
+            updatedAt?: string;
+            /** Format: date-time */
+            publishedAt?: string;
+            createdBy?: {
+                id?: number;
+                documentId?: string;
+            };
+            updatedBy?: {
+                id?: number;
+                documentId?: string;
+            };
+            locale?: string;
+            localizations?: {
+                id?: number;
+                documentId?: string;
+            }[];
+        };
+        DistrictResponse: {
+            data?: components["schemas"]["District"];
             meta?: Record<string, never>;
         };
         InstructorRequest: {
@@ -3224,19 +4024,252 @@ export interface components {
             data?: components["schemas"]["Instructor"];
             meta?: Record<string, never>;
         };
+        ProvinceRequest: {
+            data: {
+                code?: number;
+                nameTh?: string;
+                nameEn?: string;
+                districts?: (number | string)[];
+                locale?: string;
+                localizations?: (number | string)[];
+            };
+        };
+        ProvinceListResponse: {
+            data?: components["schemas"]["Province"][];
+            meta?: {
+                pagination?: {
+                    page?: number;
+                    pageSize?: number;
+                    pageCount?: number;
+                    total?: number;
+                };
+            };
+        };
+        Province: {
+            id?: number;
+            documentId?: string;
+            code?: number;
+            nameTh?: string;
+            nameEn?: string;
+            districts?: {
+                id?: number;
+                documentId?: string;
+                code?: number;
+                nameTh?: string;
+                nameEn?: string;
+                province?: {
+                    id?: number;
+                    documentId?: string;
+                    code?: number;
+                    nameTh?: string;
+                    nameEn?: string;
+                    districts?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                    /** Format: date-time */
+                    createdAt?: string;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    /** Format: date-time */
+                    publishedAt?: string;
+                    createdBy?: {
+                        id?: number;
+                        documentId?: string;
+                        firstname?: string;
+                        lastname?: string;
+                        username?: string;
+                        /** Format: email */
+                        email?: string;
+                        resetPasswordToken?: string;
+                        registrationToken?: string;
+                        isActive?: boolean;
+                        roles?: {
+                            id?: number;
+                            documentId?: string;
+                            name?: string;
+                            code?: string;
+                            description?: string;
+                            users?: {
+                                id?: number;
+                                documentId?: string;
+                            }[];
+                            permissions?: {
+                                id?: number;
+                                documentId?: string;
+                                action?: string;
+                                actionParameters?: unknown;
+                                subject?: string;
+                                properties?: unknown;
+                                conditions?: unknown;
+                                role?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                /** Format: date-time */
+                                createdAt?: string;
+                                /** Format: date-time */
+                                updatedAt?: string;
+                                /** Format: date-time */
+                                publishedAt?: string;
+                                createdBy?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                updatedBy?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                locale?: string;
+                                localizations?: {
+                                    id?: number;
+                                    documentId?: string;
+                                }[];
+                            }[];
+                            /** Format: date-time */
+                            createdAt?: string;
+                            /** Format: date-time */
+                            updatedAt?: string;
+                            /** Format: date-time */
+                            publishedAt?: string;
+                            createdBy?: {
+                                id?: number;
+                                documentId?: string;
+                            };
+                            updatedBy?: {
+                                id?: number;
+                                documentId?: string;
+                            };
+                            locale?: string;
+                            localizations?: {
+                                id?: number;
+                                documentId?: string;
+                            }[];
+                        }[];
+                        blocked?: boolean;
+                        preferedLanguage?: string;
+                        /** Format: date-time */
+                        createdAt?: string;
+                        /** Format: date-time */
+                        updatedAt?: string;
+                        /** Format: date-time */
+                        publishedAt?: string;
+                        createdBy?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        updatedBy?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        locale?: string;
+                        localizations?: {
+                            id?: number;
+                            documentId?: string;
+                        }[];
+                    };
+                    updatedBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    locale?: string;
+                    localizations?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                };
+                subdistricts?: {
+                    id?: number;
+                    documentId?: string;
+                    code?: number;
+                    nameTh?: string;
+                    nameEn?: string;
+                    district?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    /** Format: date-time */
+                    createdAt?: string;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    /** Format: date-time */
+                    publishedAt?: string;
+                    createdBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    updatedBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    locale?: string;
+                    localizations?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                }[];
+                /** Format: date-time */
+                createdAt?: string;
+                /** Format: date-time */
+                updatedAt?: string;
+                /** Format: date-time */
+                publishedAt?: string;
+                createdBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                updatedBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                locale?: string;
+                localizations?: {
+                    id?: number;
+                    documentId?: string;
+                }[];
+            }[];
+            /** Format: date-time */
+            createdAt?: string;
+            /** Format: date-time */
+            updatedAt?: string;
+            /** Format: date-time */
+            publishedAt?: string;
+            createdBy?: {
+                id?: number;
+                documentId?: string;
+            };
+            updatedBy?: {
+                id?: number;
+                documentId?: string;
+            };
+            locale?: string;
+            localizations?: {
+                id?: number;
+                documentId?: string;
+            }[];
+        };
+        ProvinceResponse: {
+            data?: components["schemas"]["Province"];
+            meta?: Record<string, never>;
+        };
         RegistrationRequest: {
             data: {
                 /** @example string or id */
                 course?: number | string;
                 /** @example string or id */
-                users_permissions_user?: number | string;
+                user?: number | string;
                 /** Format: date-time */
-                registedDate?: string;
+                registerDate?: string;
                 /** @enum {string} */
                 registerStatus?: "REGISTERED" | "PAYMENT_PENDING" | "PAYMENT_RECEIVED" | "ENROLLED" | "WAIT_LIST";
                 uploads?: (number | string)[];
                 /** @example string or id */
                 receipt?: number | string;
+                /** @example string or id */
+                receiptAddress?: number | string;
+                /** @example string or id */
+                certificateAddress?: number | string;
+                nameOnCertificate?: string;
                 locale?: string;
                 localizations?: (number | string)[];
             };
@@ -3403,7 +4436,7 @@ export interface components {
                         id?: number;
                         documentId?: string;
                     };
-                    users_permissions_user?: {
+                    user?: {
                         id?: number;
                         documentId?: string;
                         username?: string;
@@ -3475,20 +4508,111 @@ export interface components {
                         addresses?: {
                             id?: number;
                             documentId?: string;
+                            companyName?: string;
+                            contactName?: string;
+                            phone?: string;
+                            taxId?: string;
                             line1?: string;
                             line2?: string;
-                            taxId?: string;
-                            companyName?: string;
-                            contaceName?: string;
-                            subDistrice?: string;
-                            district?: string;
-                            province?: string;
                             zip?: string;
+                            province?: {
+                                id?: number;
+                                documentId?: string;
+                                code?: number;
+                                nameTh?: string;
+                                nameEn?: string;
+                                districts?: {
+                                    id?: number;
+                                    documentId?: string;
+                                    code?: number;
+                                    nameTh?: string;
+                                    nameEn?: string;
+                                    province?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    };
+                                    subdistricts?: {
+                                        id?: number;
+                                        documentId?: string;
+                                        code?: number;
+                                        nameTh?: string;
+                                        nameEn?: string;
+                                        district?: {
+                                            id?: number;
+                                            documentId?: string;
+                                        };
+                                        /** Format: date-time */
+                                        createdAt?: string;
+                                        /** Format: date-time */
+                                        updatedAt?: string;
+                                        /** Format: date-time */
+                                        publishedAt?: string;
+                                        createdBy?: {
+                                            id?: number;
+                                            documentId?: string;
+                                        };
+                                        updatedBy?: {
+                                            id?: number;
+                                            documentId?: string;
+                                        };
+                                        locale?: string;
+                                        localizations?: {
+                                            id?: number;
+                                            documentId?: string;
+                                        }[];
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt?: string;
+                                    /** Format: date-time */
+                                    updatedAt?: string;
+                                    /** Format: date-time */
+                                    publishedAt?: string;
+                                    createdBy?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    };
+                                    updatedBy?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    };
+                                    locale?: string;
+                                    localizations?: {
+                                        id?: number;
+                                        documentId?: string;
+                                    }[];
+                                }[];
+                                /** Format: date-time */
+                                createdAt?: string;
+                                /** Format: date-time */
+                                updatedAt?: string;
+                                /** Format: date-time */
+                                publishedAt?: string;
+                                createdBy?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                updatedBy?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                locale?: string;
+                                localizations?: {
+                                    id?: number;
+                                    documentId?: string;
+                                }[];
+                            };
+                            district?: {
+                                id?: number;
+                                documentId?: string;
+                            };
+                            subdistrict?: {
+                                id?: number;
+                                documentId?: string;
+                            };
                             users_permissions_user?: {
                                 id?: number;
                                 documentId?: string;
                             };
-                            title?: string;
                             /** Format: date-time */
                             createdAt?: string;
                             /** Format: date-time */
@@ -3530,7 +4654,7 @@ export interface components {
                         }[];
                     };
                     /** Format: date-time */
-                    registedDate?: string;
+                    registerDate?: string;
                     /** @enum {string} */
                     registerStatus?: "REGISTERED" | "PAYMENT_PENDING" | "PAYMENT_RECEIVED" | "ENROLLED" | "WAIT_LIST";
                     uploads?: {
@@ -3704,6 +4828,15 @@ export interface components {
                             documentId?: string;
                         }[];
                     };
+                    receiptAddress?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    certificateAddress?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    nameOnCertificate?: string;
                     /** Format: date-time */
                     createdAt?: string;
                     /** Format: date-time */
@@ -3735,6 +4868,59 @@ export interface components {
                     objective?: unknown;
                     requirement?: unknown;
                     outline?: unknown;
+                    descriptionMD?: string;
+                    objectiveMD?: string;
+                    requirementMD?: string;
+                    outlineMD?: string;
+                    /** Format: date-time */
+                    createdAt?: string;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    /** Format: date-time */
+                    publishedAt?: string;
+                    createdBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    updatedBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    locale?: string;
+                    localizations?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                };
+                isOnline?: boolean;
+                venue?: string;
+                topBanner?: {
+                    id?: number;
+                    documentId?: string;
+                    name?: string;
+                    alternativeText?: string;
+                    caption?: string;
+                    width?: number;
+                    height?: number;
+                    formats?: unknown;
+                    hash?: string;
+                    ext?: string;
+                    mime?: string;
+                    /** Format: float */
+                    size?: number;
+                    url?: string;
+                    previewUrl?: string;
+                    provider?: string;
+                    provider_metadata?: unknown;
+                    related?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                    folder?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    folderPath?: string;
                     /** Format: date-time */
                     createdAt?: string;
                     /** Format: date-time */
@@ -3775,12 +4961,12 @@ export interface components {
                     documentId?: string;
                 }[];
             };
-            users_permissions_user?: {
+            user?: {
                 id?: number;
                 documentId?: string;
             };
             /** Format: date-time */
-            registedDate?: string;
+            registerDate?: string;
             /** @enum {string} */
             registerStatus?: "REGISTERED" | "PAYMENT_PENDING" | "PAYMENT_RECEIVED" | "ENROLLED" | "WAIT_LIST";
             uploads?: {
@@ -3877,6 +5063,15 @@ export interface components {
                     documentId?: string;
                 }[];
             };
+            receiptAddress?: {
+                id?: number;
+                documentId?: string;
+            };
+            certificateAddress?: {
+                id?: number;
+                documentId?: string;
+            };
+            nameOnCertificate?: string;
             /** Format: date-time */
             createdAt?: string;
             /** Format: date-time */
@@ -3899,6 +5094,235 @@ export interface components {
         };
         RegistrationResponse: {
             data?: components["schemas"]["Registration"];
+            meta?: Record<string, never>;
+        };
+        SubdistrictRequest: {
+            data: {
+                code?: number;
+                nameTh?: string;
+                nameEn?: string;
+                /** @example string or id */
+                district?: number | string;
+                locale?: string;
+                localizations?: (number | string)[];
+            };
+        };
+        SubdistrictListResponse: {
+            data?: components["schemas"]["Subdistrict"][];
+            meta?: {
+                pagination?: {
+                    page?: number;
+                    pageSize?: number;
+                    pageCount?: number;
+                    total?: number;
+                };
+            };
+        };
+        Subdistrict: {
+            id?: number;
+            documentId?: string;
+            code?: number;
+            nameTh?: string;
+            nameEn?: string;
+            district?: {
+                id?: number;
+                documentId?: string;
+                code?: number;
+                nameTh?: string;
+                nameEn?: string;
+                province?: {
+                    id?: number;
+                    documentId?: string;
+                    code?: number;
+                    nameTh?: string;
+                    nameEn?: string;
+                    districts?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                    /** Format: date-time */
+                    createdAt?: string;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    /** Format: date-time */
+                    publishedAt?: string;
+                    createdBy?: {
+                        id?: number;
+                        documentId?: string;
+                        firstname?: string;
+                        lastname?: string;
+                        username?: string;
+                        /** Format: email */
+                        email?: string;
+                        resetPasswordToken?: string;
+                        registrationToken?: string;
+                        isActive?: boolean;
+                        roles?: {
+                            id?: number;
+                            documentId?: string;
+                            name?: string;
+                            code?: string;
+                            description?: string;
+                            users?: {
+                                id?: number;
+                                documentId?: string;
+                            }[];
+                            permissions?: {
+                                id?: number;
+                                documentId?: string;
+                                action?: string;
+                                actionParameters?: unknown;
+                                subject?: string;
+                                properties?: unknown;
+                                conditions?: unknown;
+                                role?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                /** Format: date-time */
+                                createdAt?: string;
+                                /** Format: date-time */
+                                updatedAt?: string;
+                                /** Format: date-time */
+                                publishedAt?: string;
+                                createdBy?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                updatedBy?: {
+                                    id?: number;
+                                    documentId?: string;
+                                };
+                                locale?: string;
+                                localizations?: {
+                                    id?: number;
+                                    documentId?: string;
+                                }[];
+                            }[];
+                            /** Format: date-time */
+                            createdAt?: string;
+                            /** Format: date-time */
+                            updatedAt?: string;
+                            /** Format: date-time */
+                            publishedAt?: string;
+                            createdBy?: {
+                                id?: number;
+                                documentId?: string;
+                            };
+                            updatedBy?: {
+                                id?: number;
+                                documentId?: string;
+                            };
+                            locale?: string;
+                            localizations?: {
+                                id?: number;
+                                documentId?: string;
+                            }[];
+                        }[];
+                        blocked?: boolean;
+                        preferedLanguage?: string;
+                        /** Format: date-time */
+                        createdAt?: string;
+                        /** Format: date-time */
+                        updatedAt?: string;
+                        /** Format: date-time */
+                        publishedAt?: string;
+                        createdBy?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        updatedBy?: {
+                            id?: number;
+                            documentId?: string;
+                        };
+                        locale?: string;
+                        localizations?: {
+                            id?: number;
+                            documentId?: string;
+                        }[];
+                    };
+                    updatedBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    locale?: string;
+                    localizations?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                };
+                subdistricts?: {
+                    id?: number;
+                    documentId?: string;
+                    code?: number;
+                    nameTh?: string;
+                    nameEn?: string;
+                    district?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    /** Format: date-time */
+                    createdAt?: string;
+                    /** Format: date-time */
+                    updatedAt?: string;
+                    /** Format: date-time */
+                    publishedAt?: string;
+                    createdBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    updatedBy?: {
+                        id?: number;
+                        documentId?: string;
+                    };
+                    locale?: string;
+                    localizations?: {
+                        id?: number;
+                        documentId?: string;
+                    }[];
+                }[];
+                /** Format: date-time */
+                createdAt?: string;
+                /** Format: date-time */
+                updatedAt?: string;
+                /** Format: date-time */
+                publishedAt?: string;
+                createdBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                updatedBy?: {
+                    id?: number;
+                    documentId?: string;
+                };
+                locale?: string;
+                localizations?: {
+                    id?: number;
+                    documentId?: string;
+                }[];
+            };
+            /** Format: date-time */
+            createdAt?: string;
+            /** Format: date-time */
+            updatedAt?: string;
+            /** Format: date-time */
+            publishedAt?: string;
+            createdBy?: {
+                id?: number;
+                documentId?: string;
+            };
+            updatedBy?: {
+                id?: number;
+                documentId?: string;
+            };
+            locale?: string;
+            localizations?: {
+                id?: number;
+                documentId?: string;
+            }[];
+        };
+        SubdistrictResponse: {
+            data?: components["schemas"]["Subdistrict"];
             meta?: Record<string, never>;
         };
         UploadFile: {
@@ -5098,6 +6522,368 @@ export interface operations {
             };
         };
     };
+    "get/districts": {
+        parameters: {
+            query?: {
+                /** @description Sort by attributes ascending (asc) or descending (desc) */
+                sort?: string;
+                /** @description Return page/pageSize (default: true) */
+                "pagination[withCount]"?: boolean;
+                /** @description Page number (default: 0) */
+                "pagination[page]"?: number;
+                /** @description Page size (default: 25) */
+                "pagination[pageSize]"?: number;
+                /** @description Offset value (default: 0) */
+                "pagination[start]"?: number;
+                /** @description Number of entities to return (default: 25) */
+                "pagination[limit]"?: number;
+                /** @description Fields to return (ex: title,author) */
+                fields?: string;
+                /** @description Relations to return */
+                populate?: string;
+                /** @description Filters to apply */
+                filters?: {
+                    [key: string]: unknown;
+                };
+                /** @description Locale to apply */
+                locale?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DistrictListResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "post/districts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DistrictRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DistrictResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "get/districts/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DistrictResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "put/districts/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DistrictRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DistrictResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "delete/districts/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": number;
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
     "get/instructors": {
         parameters: {
             query?: {
@@ -5460,6 +7246,368 @@ export interface operations {
             };
         };
     };
+    "get/provinces": {
+        parameters: {
+            query?: {
+                /** @description Sort by attributes ascending (asc) or descending (desc) */
+                sort?: string;
+                /** @description Return page/pageSize (default: true) */
+                "pagination[withCount]"?: boolean;
+                /** @description Page number (default: 0) */
+                "pagination[page]"?: number;
+                /** @description Page size (default: 25) */
+                "pagination[pageSize]"?: number;
+                /** @description Offset value (default: 0) */
+                "pagination[start]"?: number;
+                /** @description Number of entities to return (default: 25) */
+                "pagination[limit]"?: number;
+                /** @description Fields to return (ex: title,author) */
+                fields?: string;
+                /** @description Relations to return */
+                populate?: string;
+                /** @description Filters to apply */
+                filters?: {
+                    [key: string]: unknown;
+                };
+                /** @description Locale to apply */
+                locale?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProvinceListResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "post/provinces": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ProvinceRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProvinceResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "get/provinces/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProvinceResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "put/provinces/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ProvinceRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProvinceResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "delete/provinces/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": number;
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
     "get/registrations": {
         parameters: {
             query?: {
@@ -5756,6 +7904,368 @@ export interface operations {
         };
     };
     "delete/registrations/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": number;
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "get/subdistricts": {
+        parameters: {
+            query?: {
+                /** @description Sort by attributes ascending (asc) or descending (desc) */
+                sort?: string;
+                /** @description Return page/pageSize (default: true) */
+                "pagination[withCount]"?: boolean;
+                /** @description Page number (default: 0) */
+                "pagination[page]"?: number;
+                /** @description Page size (default: 25) */
+                "pagination[pageSize]"?: number;
+                /** @description Offset value (default: 0) */
+                "pagination[start]"?: number;
+                /** @description Number of entities to return (default: 25) */
+                "pagination[limit]"?: number;
+                /** @description Fields to return (ex: title,author) */
+                fields?: string;
+                /** @description Relations to return */
+                populate?: string;
+                /** @description Filters to apply */
+                filters?: {
+                    [key: string]: unknown;
+                };
+                /** @description Locale to apply */
+                locale?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubdistrictListResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "post/subdistricts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SubdistrictRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubdistrictResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "get/subdistricts/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubdistrictResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "put/subdistricts/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SubdistrictRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubdistrictResponse"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    "delete/subdistricts/{id}": {
         parameters: {
             query?: never;
             header?: never;

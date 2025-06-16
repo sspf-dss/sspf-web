@@ -1,0 +1,24 @@
+<div
+  class="drawer"
+  [class.enter]="isVisible"
+  [class.exit]="isClosing"
+  [ngClass]="position"
+  [style.width]="width"
+  [style.height]="height"
+  (transitionend)="onAnimationEnd()"
+>
+  <div class="drawer-header">
+    <button matIconButton class="close-btn" (click)="startClose()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <ng-container [cdkPortalOutlet]="headerPortal"></ng-container>
+  </div>
+
+  <div class="drawer-body">
+    <ng-template cdkPortalOutlet #bodyOutlet="cdkPortalOutlet"></ng-template>
+  </div>
+
+  <div class="drawer-footer" *ngIf="footerPortal">
+    <ng-container [cdkPortalOutlet]="footerPortal"></ng-container>
+  </div>
+</div>

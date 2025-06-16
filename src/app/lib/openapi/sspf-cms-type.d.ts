@@ -1,11 +1,39 @@
-import { components } from './sspf-cms';
+export type Province = {
+  id?: number;
+  documentId?: string;
+  nameTh?: string;
+  nameEn?: string;
+  districts?: District[];
+};
 
-export type Course = components['schemas']['Course'];
-export type CourseInfo = components['schemas']['CourseInfo'];
-export type Registration = components['schemas']['Registration'];
+export type District = {
+  id?: number;
+  documentId?: string;
+  nameTh?: string;
+  nameEn?: string;
+  province?: Province;
+  subdistricts?: Subdistrict[];
+};
 
-export type Instructor = components['schemas']['Instructor'];
-export type UserRegistration =
-  components['schemas']['Users-Permissions-UserRegistration'];
+export type Subdistrict = {
+  id?: number;
+  documentId?: string;
+  nameTh?: string;
+  nameEn?: string;
+  district?: District;
+};
 
-export type Address = components['schemas']['Address'];
+export type Address = {
+  id?: number;
+  documentId?: string;
+  companyName?: string;
+  contactName?: string;
+  phone?: string;
+  taxId?: string;
+  line1?: string;
+  line2?: string;
+  zip?: string;
+  province?: Province;
+  district?: District;
+  subdistrict?: Subdistrict;
+};

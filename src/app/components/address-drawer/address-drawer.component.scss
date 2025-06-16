@@ -1,0 +1,29 @@
+.address-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.add-button {
+  margin-top: 1rem;
+}
+
+.inline-form {
+  margin-top: 2rem;
+  // margin-top: 2rem;
+  // padding: 1rem;
+  // background: #fafafa;
+  // border: 1px solid #ccc;
+  // border-radius: 6px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}

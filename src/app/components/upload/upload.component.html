@@ -1,0 +1,30 @@
+<div class="flex justify-end w-full gap-4">
+  <button matButton (click)="f_input.click()">
+    <mat-icon>add</mat-icon>เลือกไฟล์
+  </button>
+  <button matButton="filled" (click)="upload()">ส่งเข้าระบบ</button>
+</div>
+<input hidden type="file" #f_input (change)="selectFiles($event)" />
+
+<mat-list>
+  <mat-list-item *ngFor="let file of files; let i = index">
+    <span matListItemIcon>
+      <button mat-icon-button (click)="removeFile(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </span>
+    <span matListItemIcon>
+      <button
+        mat-icon-button
+        (click)="openPreview(i)"
+        [disabled]="fileType(file.file.type) === 'unsupport'"
+      >
+        <mat-icon>preview</mat-icon>
+      </button>
+    </span>
+    <span matListItemTitle> {{ file.file.name }}</span>
+    <span matListItemLine>
+      {{ file.file.type }} ({{ file.file.size | number }} bytes)</span
+    >
+  </mat-list-item>
+</mat-list>

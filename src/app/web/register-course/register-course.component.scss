@@ -1,0 +1,18 @@
+@use "@angular/material" as mat;
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:host {
+  @include mat.sidenav-overrides(
+    (
+      content-background-color: none,
+    )
+  );
+
+  @include mat.form-field-overrides(
+    (
+      filled-disabled-input-text-color: black,
+      filled-disabled-label-text-color: black,
+      filled-disabled-container-color: transparent,
+    )
+  );
+}

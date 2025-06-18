@@ -1,4 +1,4 @@
-import { Component, computed, input, OnInit } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { Address } from '../../lib/openapi/sspf-cms-type';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';

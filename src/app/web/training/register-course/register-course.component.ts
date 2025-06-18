@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   computed,
   effect,
@@ -8,11 +7,9 @@ import {
   linkedSignal,
   OnInit,
   resource,
-  TemplateRef,
-  ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { StrapiStore } from '../../store/strapi.store';
+import { StrapiStore } from '../../../store/strapi.store';
 import { CommonModule } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,12 +17,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { DrawerService } from 'ngx-drawer';
-import { AddressDrawerComponent } from '../../components/address-drawer/address-drawer.component';
-import { Address } from '../../lib/openapi/sspf-cms-type';
-import { AddressCardComponent } from '../../components/address-card/address-card.component';
+import { AddressDrawerComponent } from '../../../components/address-drawer/address-drawer.component';
+import { AddressCardComponent } from '../../../components/address-card/address-card.component';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UploadComponent } from '../../components/upload/upload.component';
+import { UploadComponent } from '../../../components/upload/upload.component';
 
 @Component({
   selector: 'app-register-course',
@@ -48,7 +44,9 @@ export class RegisterCourseComponent implements OnInit {
     this.strapi.isReady$.subscribe((ready) => {
       if (ready && !this.hasRegister()) {
         this.registrationForm.patchValue({
-          email: this.strapi.user().email,
+          email: this.strapi.user()!.email,
+          phone: this.strapi.user()!.phone ?? undefined,
+          nameOnCertificate: this.strapi.user()!.name ?? undefined,
         });
       }
     });
@@ -58,11 +56,12 @@ export class RegisterCourseComponent implements OnInit {
     effect(() => {
       if (this.registrationResource.status() === 'error') {
         this.sb.open(
-          `Failed to get registrations: ${this.registrationResource.error()?.name!}`,
+          `Failed to get registrations: ${this.registrationResource.error()
+            ?.name!}`,
           'OK',
           {
             duration: 8000,
-          },
+          }
         );
       }
 
@@ -72,7 +71,7 @@ export class RegisterCourseComponent implements OnInit {
           'OK',
           {
             duration: 8000,
-          },
+          }
         );
       }
 
@@ -84,6 +83,7 @@ export class RegisterCourseComponent implements OnInit {
           phone: reg['phone'],
           receiptAddress: reg['receiptAddress']['documentId'],
           certificateAddress: reg['certificateAddress']['documentId'],
+          remark: reg['remark'],
         });
         this.receiptAddress.set(reg['receiptAddress']);
         this.certificateAddress.set(reg['certificateAddress']);
@@ -107,6 +107,7 @@ export class RegisterCourseComponent implements OnInit {
     phone: ['', Validators.required],
     receiptAddress: ['', Validators.required],
     certificateAddress: ['', Validators.required],
+    remark: [''],
   });
 
   hasRegister = computed(() => {
@@ -162,7 +163,7 @@ export class RegisterCourseComponent implements OnInit {
           filters: {
             user: {
               documentId: {
-                $eq: this.strapi.user().documentId,
+                $eq: this.strapi.user()!.documentId,
               },
             },
             course: {
@@ -207,8 +208,9 @@ export class RegisterCourseComponent implements OnInit {
         phone: this.registrationForm.value.phone,
         receiptAddress: [this.registrationForm.value.receiptAddress],
         certificateAddress: [this.registrationForm.value.certificateAddress],
-        user: [this.strapi.user().documentId],
+        user: [this.strapi.user()!.documentId],
         course: [this.courseResource.value()?.data.documentId],
+        remark: this.registrationForm.value.remark,
       })
       .then((resp) => {
         this.sb.open('ลงทะเบียนสำเร็จ', 'OK', { duration: 8000 });
@@ -239,9 +241,10 @@ export class RegisterCourseComponent implements OnInit {
       .then((resp) => resp.json());
 
     console.log(uploadResp);
+    const uploadIds = uploadResp.map((u: any) => u.id);
     const data = {
       data: {
-        uploads: { connect: [uploadResp[0].id] },
+        uploads: { connect: uploadIds },
       },
     };
 

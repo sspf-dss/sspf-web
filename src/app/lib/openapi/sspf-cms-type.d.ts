@@ -37,3 +37,23 @@ export type Address = {
   district?: District;
   subdistrict?: Subdistrict;
 };
+
+export type StrapiAuth = {
+  jwt?: string;
+  user?: User;
+};
+
+
+export type User = {
+  id?: number;
+  documentId?: string;
+  email?: string;
+  userName?: string;
+  provider?: string;
+  comfirm?: boolean;
+  blocked?: boolean;
+  adderesses?: Address[];
+  name?: string;
+  phone?: string;
+  jwt?: string;
+}

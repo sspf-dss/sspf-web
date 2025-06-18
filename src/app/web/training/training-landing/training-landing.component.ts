@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, resource } from '@angular/core';
-import { StrapiStore } from '../../store/strapi.store';
+import { StrapiStore } from '../../../store/strapi.store';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
@@ -8,12 +8,12 @@ import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-landing',
+  selector: 'app-training-landing',
   imports: [CommonModule, MatButtonModule, MatTableModule, MatCardModule],
-  templateUrl: './landing.component.html',
-  styleUrl: './landing.component.scss',
+  templateUrl: './training-landing.component.html',
+  styleUrl: './training-landing.component.scss',
 })
-export class LandingComponent {
+export class TrainingLandingComponent {
   readonly strapi = inject(StrapiStore);
   readonly route = inject(Router);
   courses = resource({

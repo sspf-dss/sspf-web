@@ -5,12 +5,12 @@ import {
   PathLocationStrategy,
 } from '@angular/common';
 import { Component, computed, inject, input, resource } from '@angular/core';
-import { StrapiStore } from '../../store/strapi.store';
+import { StrapiStore } from '../../../store/strapi.store';
 import { MatButtonModule } from '@angular/material/button';
 import { MarkdownModule } from 'ngx-markdown';
 import { Router } from '@angular/router';
-import { sum } from 'lodash';
-import { AuthStore } from '../../store/auth.store';
+import { sum } from 'lodash-es';
+import { AuthStore } from '../../../store/auth.store';
 
 @Component({
   selector: 'app-courses',
@@ -32,6 +32,7 @@ export class CoursesComponent {
   courseResource = resource({
     params: () => ({ documentId: this.documentId() }),
     loader: async ({ params, abortSignal }) => {
+      console.log(`course resource called: ${params.documentId}`);
       return this.strapi
         .client()
         .collection('courses')
@@ -39,6 +40,10 @@ export class CoursesComponent {
           populate: ['course_info', 'instructors', 'topBanner'],
         });
     },
+  });
+
+  course = computed(() => {
+    return this.courseResource.value()?.data;
   });
 
   registrationResource = resource({
@@ -64,7 +69,7 @@ export class CoursesComponent {
       )}/${this.documentId()}`
     );
 
-    return allReg - watiList >= this.courseResource.value()?.data['fee'];
+    return allReg - watiList >= this.course()!['participantNumber'];
   });
 
   registerForCourse(documentId: string) {

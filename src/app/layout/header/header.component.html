@@ -1,39 +1,64 @@
 @if(mode() == 'top') {
 <header class="absolute inset-x-0 top-0 z-50">
   <nav
-    class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+    class="mx-auto flex max-w-7xl items-center justify-between p-6 md:px-8"
     aria-label="Global"
   >
-    <div class="flex lg:flex-1 items-center">
+    <div class="flex md:flex-1 items-center">
       <span class="sr-only">SSPF</span>
       <img class="h-16 w-auto" src="/images/sspf_logo_small.png" alt="" />
 
-      <span class="title">มูลนิธิส่งเสริมวิทยาศาสตร์บริการ</span>
+      <button type="button" class="title" routerLink="/">
+        มูลนิธิส่งเสริมวิทยาศาสตร์บริการ
+      </button>
     </div>
-    <div class="flex lg:hidden">
+    <div class="flex md:hidden">
       <button mat-mini-fab (click)="clickMenu.emit(true)">
         <mat-icon>menu</mat-icon>
       </button>
     </div>
-    <div class="hidden lg:flex lg:gap-x-12"></div>
-    <div class="hidden lg:flex lg:gap-x-2 lg:flex-1 lg:justify-end">
-      <button mat-button>
-        ติดต่อเรา <mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
+    <div class="hidden md:flex md:gap-x-12"></div>
+    <div class="hidden md:flex md:gap-x-1 lg:gap-x-2 md:flex-1 md:justify-end">
+      <button mat-button routerLink="/training">หลักสูตรฝึกอบรม</button>
+      <button mat-button [matMenuTriggerFor]="aboutUsMenu">
+        เกี่ยวกับเรา <mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
       </button>
+      <mat-menu #aboutUsMenu="matMenu">
+        <button mat-menu-item routerLink="/aboutus">
+          <mat-icon>domain</mat-icon>
+          <span>ข้อมูลทั่วไป</span>
+        </button>
+        <button mat-menu-item routerLink="/executives">
+          <mat-icon>groups</mat-icon>
+          <span>กรรมการมูลนิธิ</span>
+        </button>
+        <button mat-menu-item routerLink="/activities">
+          <mat-icon>campaign</mat-icon>
+          <span>กิจกรรมมูลนิธิ</span>
+        </button>
+        <button mat-menu-item routerLink="/contact">
+          <mat-icon>contact_support</mat-icon>
+          <span>ติดต่อมูลนิธิ</span>
+        </button>
+      </mat-menu>
 
       @if(!authStore.isAuthenticated()) {
-      <button mat-button (click)="login()">Login</button>
+      <button mat-icon-button (click)="login()">
+        <mat-icon>login</mat-icon>
+      </button>
       } @else {
-      <button mat-button [matMenuTriggerFor]="userMenu">
-        {{ authStore.profile()?.username }}
-        <mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
+      <button mat-icon-button [matMenuTriggerFor]="userMenu">
+        <mat-icon>account_circle</mat-icon>
       </button>
       <mat-menu #userMenu="matMenu">
-        <button mat-menu-item>
+        <mat-list>
+          <mat-list-item>{{ authStore.profile()?.username }}</mat-list-item>
+        </mat-list>
+        <button mat-menu-item routerLink="/training/user/profile">
           <mat-icon>import_contacts</mat-icon>
-          <span>จัดการที่อยู่</span>
+          <span>ข้อมูลส่วนตัว</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item routerLink="/training/user/registrations">
           <mat-icon>history_edu</mat-icon>
           <span>ประวัติการอบรม</span>
         </button>
@@ -124,10 +149,23 @@
 } @else if (mode() == 'sidenav') {
 
 <mat-nav-list>
-  <mat-list-item>
-    <mat-icon matListItemIcon>folder</mat-icon>
-    <h3 matListItemTitle>ติดต่อเรา</h3>
+  <mat-list-item routerLink="/aboutus">
+    <mat-icon matListItemIcon>domain</mat-icon>
+    <h3 matListItemTitle>ข้อมูลทั่วไป</h3>
   </mat-list-item>
+  <mat-list-item routerLink="/executives">
+    <mat-icon matListItemIcon>groups</mat-icon>
+    <h3 matListItemTitle>กรรมการมูลนิธิ</h3>
+  </mat-list-item>
+  <mat-list-item routerLink="/activities">
+    <mat-icon matListItemIcon>campaign</mat-icon>
+    <h3 matListItemTitle>กิจกรรมมูลนิธิ</h3>
+  </mat-list-item>
+  <mat-list-item routerLink="/contact">
+    <mat-icon matListItemIcon>contact_support</mat-icon>
+    <h3 matListItemTitle>ติดต่อมูลนิธิ</h3>
+  </mat-list-item>
+  <mat-divider></mat-divider>
 
   @if(!authStore.isAuthenticated()) {
 
@@ -139,26 +177,23 @@
   </mat-action-list>
 
   } @else {
+  <mat-list-item>
+    <h3>{{ authStore.profile()?.username }}</h3>
+  </mat-list-item>
+  <mat-list-item routerLink="/training/user/profile">
+    <mat-icon matListItemIcon>import_contacts</mat-icon>
+    <h3 matListItemTitle>ข้อมูลส่วนตัว</h3>
+  </mat-list-item>
+  <mat-list-item routerLink="/training/user/registrations">
+    <mat-icon matListItemIcon>history_edu</mat-icon>
+    <h3 matListItemTitle>ประวัติการอบรม</h3>
+  </mat-list-item>
   <mat-action-list>
-    <button mat-list-item [matMenuTriggerFor]="userMenu">
-      <h3 matListItemTitle>{{ authStore.profile()?.username }}</h3>
-      <mat-icon matListItemIcon iconPositionEnd>arrow_drop_down</mat-icon>
+    <button mat-list-item (click)="logout()">
+      <mat-icon matListItemIcon>logout</mat-icon>
+      <h3 matListItemTitle>Logout</h3>
     </button>
   </mat-action-list>
-  <mat-menu #userMenu="matMenu">
-    <button mat-menu-item>
-      <mat-icon>import_contacts</mat-icon>
-      <span>จัดการที่อยู่</span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon>history_edu</mat-icon>
-      <span>ประวัติการอบรม</span>
-    </button>
-    <button mat-menu-item (click)="logout()">
-      <mat-icon>logout</mat-icon>
-      <span>logout</span>
-    </button>
-  </mat-menu>
   }
 </mat-nav-list>
 }

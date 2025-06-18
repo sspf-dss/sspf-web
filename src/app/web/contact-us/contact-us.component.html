@@ -1,0 +1,64 @@
+<div class="mx-auto max-w-7xl px-6 mb-8 lg:px-8">
+  <app-breadcrumb [items]="['เกี่ยวกับเรา', 'ติดต่อมูลนิธิ']"></app-breadcrumb>
+</div>
+
+<div class="py-8 sm:py-16">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div
+      class="mx-auto max-w-2xl divide-y divide-gray-100 lg:mx-0 lg:max-w-none"
+    >
+      <div class="grid grid-cols-1 gap-10 py-16 lg:grid-cols-3">
+        <div>
+          <div
+            class="text-4xl header-font tracking-tight text-pretty text-gray-900"
+          >
+            ช่องทางการติดต่อ
+          </div>
+          <p class="mt-4 text-base/7 text-gray-600">
+            หากต้องการข้อมูลเพิ่มเติมหรือสอบถามเกี่ยวกับกิจกรรมที่มูลนิธิสามารถร่วมดำเนินการได้
+          </p>
+        </div>
+        <div
+          class="bg-white grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-2 lg:gap-8"
+        >
+          <app-contact-block
+            title="ผู้จัดการมูลนิธิ"
+            contact="เดช บัวคลี่"
+            email="det@sspf.or.th"
+            phone="091 379 7096"
+          />
+          <app-contact-block
+            title="ผู้ประสานงานอบรม"
+            contact="พัชรี แก้วนพรัตน์"
+            email="patcharee@sspf.or.th"
+            phone="02 201 7497"
+          />
+        </div>
+      </div>
+      <div class="grid grid-cols-1 gap-10 py-16 lg:grid-cols-3">
+        <div>
+          <div class="text-4xl header-font text-pretty text-gray-900">
+            ที่อยู่มูลนิธิ
+          </div>
+          <p class="mt-4 text-base/7 text-gray-600">
+            เลขประจำตัวผู้เสียภาษี <br />
+            099-3-00047234-9
+          </p>
+        </div>
+        <div
+          class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-2 lg:gap-8"
+        >
+          <div class="rounded-2xl bg-gray-50 p-10">
+            <h3 class="text-base/7 font-semibold text-gray-900">
+              สำนักงานใหญ่
+            </h3>
+            <address class="mt-3 space-y-1 text-sm/6 text-gray-600 not-italic">
+              <p>75/7 ถนนพระรามที่ 6</p>
+              <p>ราชเทวี กรุงเทพมหานคร 10210</p>
+            </address>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

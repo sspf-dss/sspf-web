@@ -1,0 +1,33 @@
+<div class="mx-auto max-w-3xl">
+  <div class="flex justify-between">
+    <div>
+      <p class="mt-8 big-text text-gray-900">ข้อมูลส่วนตัว</p>
+      <p class="mt-1 text-sm/6 text-gray-500">
+        กรุณาปรับปรุงข้อมูลให้เป็นปัจจุบัน
+      </p>
+    </div>
+    <div class="mt-14">
+      <button mat-button class="big-button" (click)="openDrawer()">
+        <mat-icon>edit</mat-icon>จัดการที่อยู่
+      </button>
+    </div>
+  </div>
+  <app-update-user-attribute
+    attrName="email"
+    attrDesc="Email"
+    [user]="strapi.user()!"
+    [disableEdit]="true"
+  />
+
+  <app-update-user-attribute
+    attrName="name"
+    attrDesc="ชื่อ-นามสกุล"
+    [user]="strapi.user()!"
+  />
+
+  <app-update-user-attribute
+    attrName="phone"
+    attrDesc="เบอร์โทรศัพท์"
+    [(user)]="userLocal"
+  />
+</div>

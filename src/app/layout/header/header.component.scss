@@ -1,14 +1,34 @@
 @use "@angular/material" as mat;
 
-$text-size: 20px;
+$text-size-lg: 20px;
+$text-size-md: 18px;
 $header-font: var(--mat-sys-display-large-font);
+
+@mixin text-size($text-size) {
+  :host {
+    @include mat.button-overrides(
+      (
+        text-label-text-size: $text-size,
+      )
+    );
+  }
+
+  .title {
+    font-size: $text-size;
+  }
+}
 
 :host {
   @include mat.button-overrides(
     (
-      text-label-text-size: $text-size,
       text-label-text-font: $header-font,
       text-label-text-weight: 400,
+    )
+  );
+
+  @include mat.icon-overrides(
+    (
+      color: var(--mat-sys-primary),
     )
   );
 }
@@ -16,7 +36,7 @@ $header-font: var(--mat-sys-display-large-font);
 .mat-mdc-menu-item {
   @include mat.menu-overrides(
     (
-      item-label-text-size: $text-size - 4px,
+      item-label-text-size: $text-size-lg - 4px,
       item-label-text-font: $header-font,
       item-label-text-weight: 400,
     )
@@ -25,6 +45,17 @@ $header-font: var(--mat-sys-display-large-font);
 
 .title {
   font-family: $header-font;
-  font-size: $text-size;
+  font-size: $text-size-lg;
   margin: 0px 8px;
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+}
+
+@media (width >= 48rem) {
+  @include text-size($text-size-md);
+}
+
+@media (width >= 64rem) {
+  @include text-size($text-size-lg);
 }

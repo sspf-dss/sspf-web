@@ -4,9 +4,9 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <div class="bg-white">
+    <div class="bg-white min-h-screen flex flex-col">
       <app-header [mode]="'top'" (clickMenu)="toggleMenu($event)" />
-      <main class="isolate">
+      <main class="isolate flex-grow">
         <div
           class="relative isolate -z-10 overflow-hidden bg-linear-to-b from-indigo-100/20 pt-14"
         >

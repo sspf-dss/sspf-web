@@ -8,14 +8,12 @@ import {
   withState,
 } from '@ngrx/signals';
 import { AuthStore } from './auth.store';
-import { computed, effect, inject, resource, signal } from '@angular/core';
-import { paths } from '../lib/openapi/sspf-cms';
-import createClient, { Client, Middleware } from 'openapi-fetch';
+import { computed, effect, inject, resource } from '@angular/core';
 import { strapi, StrapiClient } from '@strapi/client';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { StrapiAuth, User } from '../lib/openapi/sspf-cms-type';
 
 type StrapiState = {
-  client1: Client<paths>;
   client: StrapiClient;
   isReady: boolean;
 };
@@ -25,7 +23,7 @@ const STRAPI_URL = 'http://localhost:1338';
 const BASE_URL = `${STRAPI_URL}/api`;
 
 const initialState: StrapiState = {
-  client1: createClient<paths>({ baseUrl: BASE_URL }),
+  // client1: createClient<paths>({ baseUrl: BASE_URL }),
   client: strapi({ baseURL: BASE_URL }),
   isReady: false,
 };
@@ -37,11 +35,11 @@ export const StrapiStore = signalStore(
   withState(initialState),
   withProps(() => ({
     _authStore: inject(AuthStore),
-    _middleware: {
-      onRequest() {
-        return undefined;
-      },
-    } as Middleware,
+    // _middleware: {
+    //   onRequest() {
+    //     return undefined;
+    //   },
+    // } as Middleware,
   })),
   withProps(({ isReady }) => ({
     isReady$: toObservable(isReady),
@@ -53,7 +51,7 @@ export const StrapiStore = signalStore(
         const res = await fetch(
           `${STRAPI_URL}/api/auth/keycloak/callback?access_token=${token}`,
         );
-        return await res.json();
+        return await res.json() as StrapiAuth;
       },
     }),
   })),
@@ -72,7 +70,7 @@ export const StrapiStore = signalStore(
     }),
     user: computed(() => {
       if (store._strapiProviderAuthResource.hasValue()) {
-        return store._strapiProviderAuthResource.value()?.user;
+        return store._strapiProviderAuthResource.value().user as User;
       } else {
         return undefined;
       }

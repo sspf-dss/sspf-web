@@ -125,7 +125,7 @@ export class AddressDrawerComponent implements HasDrawerTemplates, OnInit {
         .client()
         .collection('addresses')
         .find({
-          filters: { user: { documentId: this.strapi.user().documentId } },
+          filters: { user: { documentId: this.strapi.user()!.documentId } },
           populate: ['province', 'district', 'subdistrict'],
         })
         .then((resp) => resp.data as Address[]);
@@ -232,7 +232,7 @@ export class AddressDrawerComponent implements HasDrawerTemplates, OnInit {
       province: [formValue.province],
       district: [formValue.district],
       subdistrict: [formValue.subdistrict],
-      user: [this.strapi.user().documentId!],
+      user: [this.strapi.user()!.documentId!],
     };
 
     if (isNew) {

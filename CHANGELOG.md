@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](///compare/v0.1.0...v0.2.0) (2025-06-18)
+
+
+### Features
+
+* **register and course web:** add wait_list status e835eb4
+
 ## [0.1.0](///compare/v0.0.2...v0.1.0) (2025-06-18)
 
 

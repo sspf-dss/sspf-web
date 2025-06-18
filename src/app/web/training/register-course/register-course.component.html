@@ -49,7 +49,16 @@
           </div>
         </dl>
 
-        @if (hasRegister() && !hasPaymentReceived()) {
+        @if(hasRegister() && hasWaitlist()) {
+        <div
+          class="mt-10 border-t border-gray-200 pt-6 sm:flex sm:flex-col sm:items-center sm:justify-between"
+        >
+          <div class="mt-4 text-center text-red-700 sm:mt-0 sm:text-left">
+            <p>หลักสูตรเต็มแล้ว ขอบคุณที่ให้ความสนใจ</p>
+            ลงทะเบียนรับข้อมูลเมื่อมีการเปิดหลักสูตรรุ่นใหม่แล้ว
+          </div>
+        </div>
+        } @else if (hasRegister() && !hasPaymentReceived()) {
         <div
           class="mt-10 border-t border-gray-200 pt-6 sm:flex sm:flex-col sm:items-center sm:justify-between"
         >
@@ -72,6 +81,21 @@
             class="mt-4 text-center text-sm text-gray-500 sm:mt-0 sm:text-left"
           >
             คุณได้ลงทะเบียนและส่งเอกสารการชำระค่าลงทะเบียนเรียบร้อยแล้ว
+          </div>
+        </div>
+        } @else if (isFulled()) {
+        <div
+          class="mt-10 border-t border-gray-200 pt-6 sm:flex sm:items-center sm:justify-between"
+        >
+          <div
+            class="mt-4 text-center text-sm text-red-500 sm:mt-0 sm:text-left"
+          >
+            หลักสูตรมีผู้ลงทะเบียนเต็มแล้ว ลงทะเบียนรับแจ้งเตือน
+          </div>
+          <div>
+            <button matButton="filled" (click)="registerWaitList()">
+              ลงทะเบียน
+            </button>
           </div>
         </div>
         } @else {
@@ -127,6 +151,8 @@
             </mat-form-field>
           </div>
         </section>
+
+        @if((!isFulled() || hasRegister()) && !hasRegister()) {
 
         <section aria-labelledby="payment-heading" class="mt-10">
           <h2
@@ -228,6 +254,8 @@
           </button>
           }
         </section>
+        }
+
         <section aria-labelledby="remark-heading" class="mt-10">
           <h2
             id="remark-heading"

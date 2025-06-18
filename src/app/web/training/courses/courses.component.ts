@@ -32,7 +32,6 @@ export class CoursesComponent {
   courseResource = resource({
     params: () => ({ documentId: this.documentId() }),
     loader: async ({ params, abortSignal }) => {
-      console.log(`course resource called: ${params.documentId}`);
       return this.strapi
         .client()
         .collection('courses')
@@ -60,14 +59,6 @@ export class CoursesComponent {
     const registerCount = this.registrationResource.value();
     const allReg = sum(Object.values(registerCount)) ?? 0;
     const watiList = registerCount['WAIT_LIST'] ?? 0;
-
-    console.log(
-      `href: ${window.location.protocol}//${
-        window.location.host
-      }${this.location.prepareExternalUrl(
-        '/training/register-course'
-      )}/${this.documentId()}`
-    );
 
     return allReg - watiList >= this.course()!['participantNumber'];
   });

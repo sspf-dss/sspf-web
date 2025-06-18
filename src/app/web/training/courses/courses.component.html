@@ -47,7 +47,19 @@
 
       <div class="mt-10">
         @if(isFulled()) {
-        <p>เต็มแล้ว</p>
+        <div
+          class="header-font text-xl my-4 text-red-700 bg-red-100 border-red-500 border-1 p-4 rounded-lg text-center"
+        >
+          <p>ลงทะเบียนเต็มแล้ว</p>
+          <p>กดปุ่มด้านล่างเพื่อรับแจ้งเตือนเมื่อเปิดหลักสูตรรุ่นใหม่</p>
+
+          <button
+            mat-flat-button
+            (click)="registerForCourse(course()!['documentId'])"
+          >
+            ลงชื่อรับแจ้งเตือน
+          </button>
+        </div>
         } @else {
         <button
           mat-flat-button

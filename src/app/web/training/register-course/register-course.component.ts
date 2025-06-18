@@ -22,6 +22,7 @@ import { AddressCardComponent } from '../../../components/address-card/address-c
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UploadComponent } from '../../../components/upload/upload.component';
+import sum from 'lodash-es/sum';
 
 @Component({
   selector: 'app-register-course',
@@ -81,8 +82,12 @@ export class RegisterCourseComponent implements OnInit {
           nameOnCertificate: reg['nameOnCertificate'],
           email: reg['email'],
           phone: reg['phone'],
-          receiptAddress: reg['receiptAddress']['documentId'],
-          certificateAddress: reg['certificateAddress']['documentId'],
+          receiptAddress: reg['receiptAddress']
+            ? reg['receiptAddress']['documentId']
+            : undefined,
+          certificateAddress: reg['certificateAddress']
+            ? reg['certificateAddress']['documentId']
+            : undefined,
           remark: reg['remark'],
         });
         this.receiptAddress.set(reg['receiptAddress']);
@@ -92,6 +97,18 @@ export class RegisterCourseComponent implements OnInit {
       }
     });
   }
+
+  course = computed(() => {
+    return this.courseResource.value()?.data;
+  });
+
+  isFulled = computed(() => {
+    const registerCount = this.registrationCountResource.value();
+    const allReg = sum(Object.values(registerCount)) ?? 0;
+    const watiList = registerCount['WAIT_LIST'] ?? 0;
+
+    return allReg - watiList >= this.course()!['participantNumber'];
+  });
 
   readonly strapi = inject(StrapiStore);
   readonly drawer = inject(DrawerService);
@@ -114,6 +131,13 @@ export class RegisterCourseComponent implements OnInit {
     return (
       this.registrationResource.hasValue() &&
       this.registrationResource.value().length > 0
+    );
+  });
+
+  hasWaitlist = computed(() => {
+    return (
+      this.hasRegister() &&
+      this.registrationResource.value()![0]!['registerStatus'] === 'WAIT_LIST'
     );
   });
 
@@ -153,6 +177,16 @@ export class RegisterCourseComponent implements OnInit {
     },
   });
 
+  registrationCountResource = resource({
+    params: () => ({ documentId: this.documentId() }),
+    loader: async ({ params, abortSignal }) => {
+      return this.strapi
+        .client()
+        .fetch(`courses/${params.documentId}/registeredCount`)
+        .then((resp) => resp.json());
+    },
+  });
+
   registrationResource = resource({
     params: this.strapi.hasJwt,
     loader: async ({ params, abortSignal }) => {
@@ -188,6 +222,44 @@ export class RegisterCourseComponent implements OnInit {
     },
   });
 
+  async registerWaitList() {
+    this.registrationForm.markAllAsTouched();
+    const controls = this.registrationForm.controls;
+    if (
+      controls.nameOnCertificate.invalid ||
+      controls.email.invalid ||
+      controls.phone.invalid
+    ) {
+      this.sb.open('กรุณาใส่ข้อมูลลงทะเบียนให้ครบถ้วน', 'OK', {
+        duration: 3000,
+      });
+      return;
+    }
+    const now = new Date();
+
+    const data = {
+      data: {
+        registerDate: now,
+        nameOnCertificate: this.registrationForm.value.nameOnCertificate,
+        email: this.registrationForm.value.email,
+        phone: this.registrationForm.value.phone,
+        remark: this.registrationForm.value.remark,
+        course: [this.courseResource.value()?.data.documentId],
+        user: [this.strapi.user()!.documentId],
+      },
+    };
+
+    this.strapi.client().fetch('/registrations/waitlist', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    this.registrationResource.reload();
+  }
+
   async register() {
     this.registrationForm.markAllAsTouched();
     if (!this.registrationForm.valid) {
@@ -197,10 +269,10 @@ export class RegisterCourseComponent implements OnInit {
       return;
     }
 
-    const courses = this.strapi.client().collection('registrations');
+    const registrations = this.strapi.client().collection('registrations');
     const now = new Date();
 
-    const resp = await courses
+    const resp = await registrations
       .create({
         registerDate: now,
         nameOnCertificate: this.registrationForm.value.nameOnCertificate,

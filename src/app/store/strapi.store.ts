@@ -12,7 +12,7 @@ import { computed, effect, inject, resource } from '@angular/core';
 import { strapi, StrapiClient } from '@strapi/client';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { StrapiAuth, User } from '../lib/openapi/sspf-cms-type';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 
 type StrapiState = {
   client: StrapiClient;

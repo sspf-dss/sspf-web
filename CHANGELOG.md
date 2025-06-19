@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.6](https://github.com/sspf-dss/sspf-web/compare/v0.3.5...v0.3.6) (2025-06-19)
+
+
+### Bug Fixes
+
+* **add registered count:** adding Registered Count in the Course page ([bb9bf2c](https://github.com/sspf-dss/sspf-web/commit/bb9bf2c10c20b7d871ba0f22a9406b6e97c51500))
+
 ### [0.3.5](https://github.com/sspf-dss/sspf-web/compare/v0.3.4...v0.3.5) (2025-06-19)
 
 ### [0.3.4](https://github.com/sspf-dss/sspf-web/compare/v0.3.3...v0.3.4) (2025-06-19)

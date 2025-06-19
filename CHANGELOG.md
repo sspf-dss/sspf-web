@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.2](https://github.com/sspf-dss/sspf-web/compare/v0.3.1...v0.3.2) (2025-06-19)
+
+
+### Bug Fixes
+
+* **angular.json:** replace enviroment files for production ([b6cfb2a](https://github.com/sspf-dss/sspf-web/commit/b6cfb2a2a1d29bdacc50151700de03f123e2ff66))
+
 ### [0.3.1](https://github.com/sspf-dss/sspf-web/compare/v0.3.0...v0.3.1) (2025-06-19)
 
 

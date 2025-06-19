@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.3](https://github.com/sspf-dss/sspf-web/compare/v0.3.2...v0.3.3) (2025-06-19)
+
+
+### Bug Fixes
+
+* **authstore.logout():** returnt to window.location.origin ([2662f00](https://github.com/sspf-dss/sspf-web/commit/2662f0082578af8f273780564e22048fc5b3336d))
+
 ### [0.3.2](https://github.com/sspf-dss/sspf-web/compare/v0.3.1...v0.3.2) (2025-06-19)
 
 

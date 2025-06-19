@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/sspf-dss/sspf-web/compare/v0.2.0...v0.3.0) (2025-06-19)
+
+
+### Features
+
+* **environments:** add environments ([7284c17](https://github.com/sspf-dss/sspf-web/commit/7284c17f34e926cfc57d58219649caa2d09fb34f))
+
 ## [0.2.0](///compare/v0.1.0...v0.2.0) (2025-06-18)
 
 

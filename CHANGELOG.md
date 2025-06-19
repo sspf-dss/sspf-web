@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.4](https://github.com/sspf-dss/sspf-web/compare/v0.3.3...v0.3.4) (2025-06-19)
+
+
+### Bug Fixes
+
+* **head page:** update text and styling for mobile ([ff5cc3b](https://github.com/sspf-dss/sspf-web/commit/ff5cc3b1a978c588cc6f342a48ed911303d186a3))
+
 ### [0.3.3](https://github.com/sspf-dss/sspf-web/compare/v0.3.2...v0.3.3) (2025-06-19)
 
 

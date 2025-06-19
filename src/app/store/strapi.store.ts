@@ -12,13 +12,14 @@ import { computed, effect, inject, resource } from '@angular/core';
 import { strapi, StrapiClient } from '@strapi/client';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { StrapiAuth, User } from '../lib/openapi/sspf-cms-type';
+import { environment } from '../../environments/environment.development';
 
 type StrapiState = {
   client: StrapiClient;
   isReady: boolean;
 };
 
-const STRAPI_URL = 'http://localhost:1338';
+const STRAPI_URL = environment.cmsUrl;
 
 const BASE_URL = `${STRAPI_URL}/api`;
 
@@ -49,9 +50,9 @@ export const StrapiStore = signalStore(
       params: store._authStore.token,
       loader: async ({ params: token }) => {
         const res = await fetch(
-          `${STRAPI_URL}/api/auth/keycloak/callback?access_token=${token}`,
+          `${STRAPI_URL}/api/auth/keycloak/callback?access_token=${token}`
         );
-        return await res.json() as StrapiAuth;
+        return (await res.json()) as StrapiAuth;
       },
     }),
   })),
@@ -100,5 +101,5 @@ export const StrapiStore = signalStore(
         }
       });
     },
-  })),
+  }))
 );

@@ -43,7 +43,6 @@ export type StrapiAuth = {
   user?: User;
 };
 
-
 export type User = {
   id?: number;
   documentId?: string;
@@ -56,4 +55,15 @@ export type User = {
   name?: string;
   phone?: string;
   jwt?: string;
-}
+};
+
+export type RegisterStatus =
+  | 'REGISTERED'
+  | 'PAYMENT_PENDING'
+  | 'PAYMENT_RECEIVED'
+  | 'ENROLLED'
+  | 'WAIT_LIST';
+
+export type RegisterCount = {
+  [key in RegisterStatus]: number | undefined;
+};

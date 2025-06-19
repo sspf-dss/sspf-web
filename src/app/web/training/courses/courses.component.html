@@ -41,9 +41,29 @@
       }
 
       <p class="text-xl tracking-normal text-red-700">
-        จำนวนที่รับลงทะเบียน <br />
-        {{ course()!["participantNumber"] }} ท่าน
+        จำนวนที่รับอบรม {{ course()!["participantNumber"] }} ท่าน
       </p>
+
+      <div class="text-sm tracking-normal text-gray-600">
+        <p class="mb-0">จำนวคนที่ลงทะเบียนแล้ว {{ registeredCount() }} ท่าน</p>
+        <ul class="mt-0 pt-0">
+          <li>
+            รอส่งหลักฐานการชำระค่าลงทะเบียน
+            {{ registrationResource.value()!["PAYMENT_PENDING"] ?? 0 }}
+            ท่าน
+          </li>
+          <li>
+            ชำระค่าลงทะเบียนแล้วรอตรวจสอบ
+            {{ registrationResource.value()!["PAYMENT_RECEIVED"] ?? 0 }}
+            ท่าน
+          </li>
+          <li>
+            ตรวจสอบหลักฐานการชำระค่าลงทะเบียนแล้ว
+            {{ registrationResource.value()!["ENROLLED"] ?? 0 }}
+            ท่าน
+          </li>
+        </ul>
+      </div>
 
       <div class="mt-10">
         @if(isFulled()) {

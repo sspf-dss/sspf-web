@@ -11,6 +11,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { Router } from '@angular/router';
 import { sum } from 'lodash-es';
 import { AuthStore } from '../../../store/auth.store';
+import { RegisterCount } from '../../../lib/openapi/sspf-cms-type';
 
 @Component({
   selector: 'app-courses',
@@ -51,12 +52,21 @@ export class CoursesComponent {
       return this.strapi
         .client()
         .fetch(`courses/${params.documentId}/registeredCount`)
-        .then((resp) => resp.json());
+        .then((resp) => resp.json().then((json) => json as RegisterCount));
     },
   });
 
+  registeredCount = computed(() => {
+    const rc = this.registrationResource.value()!;
+    return (
+      (rc['ENROLLED'] ?? 0) +
+      (rc['PAYMENT_PENDING'] ?? 0) +
+      (rc['PAYMENT_RECEIVED'] ?? 0)
+    );
+  });
+
   isFulled = computed(() => {
-    const registerCount = this.registrationResource.value();
+    const registerCount = this.registrationResource.value()!;
     const allReg = sum(Object.values(registerCount)) ?? 0;
     const watiList = registerCount['WAIT_LIST'] ?? 0;
 

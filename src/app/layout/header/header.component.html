@@ -147,8 +147,17 @@
   </div>
 --></header>
 } @else if (mode() == 'sidenav') {
-
+<div class="h-8"></div>
 <mat-nav-list>
+  <mat-list-item routerLink="/">
+    <mat-icon matListItemIcon>home</mat-icon>
+    <h3 matListItemTitle>หน้าแรก</h3>
+  </mat-list-item>
+  <mat-list-item routerLink="/training">
+    <mat-icon matListItemIcon>school</mat-icon>
+    <h3 matListItemTitle>หลักสูตรฝึกอบรมสำหรับบุคคลทั่วไป</h3>
+  </mat-list-item>
+  <mat-divider />
   <mat-list-item routerLink="/aboutus">
     <mat-icon matListItemIcon>domain</mat-icon>
     <h3 matListItemTitle>ข้อมูลทั่วไป</h3>

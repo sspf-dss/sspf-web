@@ -1,7 +1,7 @@
 @use "@angular/material" as mat;
 
 $text-size-lg: 20px;
-$text-size-md: 18px;
+$text-size-md: 14px;
 $header-font: var(--mat-sys-display-large-font);
 
 :host {
@@ -9,10 +9,10 @@ $header-font: var(--mat-sys-display-large-font);
     (
       text-label-text-font: $header-font,
       text-label-text-weight: 300,
-      text-label-text-size: $text-size-lg,
+      text-label-text-size: $text-size-md,
       filled-label-text-font: $header-font,
       filled-label-text-weight: 300,
-      filled-label-text-size: $text-size-lg,
+      filled-label-text-size: $text-size-md,
     )
   );
 }

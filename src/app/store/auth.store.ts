@@ -51,7 +51,7 @@ export const AuthStore = signalStore(
   })),
   withComputed((store) => ({
     hasAuthenticated: computed(() =>
-      store.isAuthenticated() ? true : undefined,
+      store.isAuthenticated() ? true : undefined
     ),
     profile: computed(() => store.userProfileResource.value()),
   })),
@@ -60,7 +60,9 @@ export const AuthStore = signalStore(
       store._keycloak.login(options);
     },
     logout: () => {
-      store._keycloak.logout();
+      store._keycloak.logout({
+        redirectUri: window.location.origin,
+      });
     },
   })),
   withMethods((store) => ({
@@ -87,5 +89,5 @@ export const AuthStore = signalStore(
     onInit(store) {
       store._updateAuth(store._keycloakEventSignal);
     },
-  }),
+  })
 );

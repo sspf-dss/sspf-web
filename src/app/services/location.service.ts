@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { StrapiStore } from '../store/strapi.store';
-import { District, Province, Subdistrict } from '../lib/openapi/sspf-cms-type';
+import { District, Province, Subdistrict } from '../lib/types/sspf-cms-type';
 
 @Injectable({
   providedIn: 'root',

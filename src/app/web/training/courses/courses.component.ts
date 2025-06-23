@@ -11,7 +11,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { Router } from '@angular/router';
 import { sum } from 'lodash-es';
 import { AuthStore } from '../../../store/auth.store';
-import { RegisterCount } from '../../../lib/openapi/sspf-cms-type';
+import { RegisterCount } from '../../../lib/types/sspf-cms-type';
 
 @Component({
   selector: 'app-courses',

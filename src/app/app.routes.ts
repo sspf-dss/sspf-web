@@ -5,6 +5,7 @@ import { isAuthenticatedGuard } from './guards/is-authenticated.guard';
 export const routes: Routes = [
   {
     path: '',
+    title: 'มูลนิธิส่งเสริมวิทยาศาสตร์บริการ',
     loadComponent: () =>
       import('./layout/main-layout/main-layout.component').then(
         (mod) => mod.MainLayoutComponent

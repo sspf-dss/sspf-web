@@ -1,5 +1,5 @@
 import { Component, computed, input } from '@angular/core';
-import { Address } from '../../lib/openapi/sspf-cms-type';
+import { Address } from '../../lib/types/sspf-cms-type';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';

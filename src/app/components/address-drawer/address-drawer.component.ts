@@ -31,7 +31,7 @@ import {
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { LocationService } from '../../services/location.service';
-import { Address } from '../../lib/openapi/sspf-cms-type';
+import { Address } from '../../lib/types/sspf-cms-type';
 import { StrapiStore } from '../../store/strapi.store';
 import { AddressCardComponent } from '../address-card/address-card.component';
 import { add } from 'lodash';
@@ -60,7 +60,7 @@ export class AddressDrawerComponent implements HasDrawerTemplates, OnInit {
     private readonly drawer: DrawerService,
     private readonly fb: FormBuilder,
     private readonly snackBar: MatSnackBar,
-    private readonly locationService: LocationService,
+    private readonly locationService: LocationService
   ) {
     this.addressForm = this.fb.group({
       id: [''],

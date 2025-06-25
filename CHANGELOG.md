@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/sspf-dss/sspf-web/compare/v0.3.7...v0.4.0) (2025-06-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* **move to monorepo:** change all build scripts and run script and adding new admin application
+
+### Features
+
+* **move to monorepo:** move to MonoRepo and add admin application ([9fe67b0](https://github.com/sspf-dss/sspf-web/commit/9fe67b0de3c355a8b31abc3cb0c19f524fd74a99))
+
 ### [0.3.7](https://github.com/sspf-dss/sspf-web/compare/v0.3.6...v0.3.7) (2025-06-23)
 
 

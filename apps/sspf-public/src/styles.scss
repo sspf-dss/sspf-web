@@ -1,0 +1,34 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+@use 'tailwind';
+
+$my-theme: (
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
+  ),
+  typography: (
+    plain-family: 'Noto Sans Thai Looped',
+    brand-family: 'Mitr',
+  ),
+  density: 0,
+);
+
+html {
+  @include mat.theme($my-theme);
+} /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: 'Noto Sans Thai Looped', 'Helvetica Neue', sans-serif;
+}
+
+.header-font {
+  font-family: var(--mat-sys-display-large-font);
+}

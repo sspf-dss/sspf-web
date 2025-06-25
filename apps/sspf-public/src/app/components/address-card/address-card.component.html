@@ -1,0 +1,36 @@
+@if (address()) {
+<div class="flex space-x-4">
+  <div class="min-w-0 flex-1 pt-1.5 sm:pt-0">
+    <h3 *ngIf="address().companyName" class="text-gray-900 m-0">
+      {{ address().companyName }}
+    </h3>
+    <p *ngIf="address().taxId" class="m-0">{{ address().taxId }}</p>
+    <h3
+      *ngIf="address().contactName"
+      class="text-gray-900 mb-0"
+      [ngClass]="{
+          'mt-0': address().companyName == undefined,
+          'mt-1': address().companyName != undefined,
+        }"
+    >
+      {{ address().contactName }}
+    </h3>
+    <p *ngIf="address().phone" class="m-0 font-medium text-gray-900">
+      {{ address().phone }}
+    </p>
+
+    <p class="m-0 text-sm text-gray-500 mt-1 mb-0">
+      {{ address().line1 }} <br *ngIf="address().line2" />
+      {{ address().line2 }}
+    </p>
+    <p class="m-0 text-sm text-gray-500">
+      {{ isBangkok() ? 'แขวง' : 'ตำบล' }}{{ address().subdistrict?.nameTh }}
+      {{ isBangkok() ? 'เขต' : 'อำเภอ' }}{{ address().district?.nameTh }}
+    </p>
+    <p class="m-0 text-sm text-gray-500">
+      {{ isBangkok() ? 'จังหวัด' : 'จังหวัด' }}{{ address().province?.nameTh }}
+      {{ address().zip }}
+    </p>
+  </div>
+</div>
+}

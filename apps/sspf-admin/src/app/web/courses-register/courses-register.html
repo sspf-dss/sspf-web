@@ -1,0 +1,94 @@
+<h3>หลักสูตรฝึกอบรม</h3>
+@if(course()) {
+<p>{{course().name}}</p>
+} @if(registrations()) {
+
+<table mat-table [dataSource]="registrations()" multiTemplateDataRows>
+  <ng-container matColumnDef="registerDate">
+    <th mat-header-cell *matHeaderCellDef>วันที่ลงทะเบียน</th>
+    <td mat-cell *matCellDef="let element" class="element-row">
+      <p>{{ element.registerDate | date:'dd MMM yyyy HH:mm' }}</p>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="nameOnCertificate">
+    <th mat-header-cell *matHeaderCellDef>ชื่อผู้เข้าอบรม</th>
+    <td mat-cell *matCellDef="let element" class="element-row">
+      <p>{{ element.nameOnCertificate }}</p>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef>email</th>
+    <td mat-cell *matCellDef="let element" class="element-row">
+      <p>{{ element.email }}</p>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="phone">
+    <th mat-header-cell *matHeaderCellDef>เบอร์โทร</th>
+    <td mat-cell *matCellDef="let element" class="element-row">
+      <p>{{ element.phone }}</p>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="registerStatus">
+    <th mat-header-cell *matHeaderCellDef>สถานะการลงทะเบียน</th>
+    <td mat-cell *matCellDef="let element" class="element-row">
+      @switch (element.registerStatus) { @case ('REGISTERED') {
+      <p>ลงทะเบียนแล้ว-ไม่ใช้</p>
+      } @case ('PAYMENT_PENDING') {
+      <p>รอส่งหลักฐานชำระค่าลงทะเบียน</p>
+      } @case ('PAYMENT_RECEIVED') {
+      <p>รอตรวจสอบหลักฐานชำระค่าลงทะเบียน</p>
+      } @case ('ENROLLED') {
+      <p>ตรวจสอบออกใบเสร็จแล้ว</p>
+      } @case ('WAIT_LIST') {
+      <p>จองลงทะเบียน</p>
+      } }
+    </td>
+  </ng-container>
+
+  <!-- Secondary Column -->
+  <ng-container matColumnDef="secondary">
+    <td mat-cell [attr.colspan]="5" *matCellDef="let element">
+      @if(element.uploads && element.uploads.length > 0) {
+      <div class="flex items-center mt-4">
+        <span>หลักฐานการโอนเงิน</span> @for(upload of element.uploads; track
+        upload.id) {
+        <button
+          mat-icon-button
+          (click)="openUpload(upload.url, fileType(upload.mime))"
+          [disabled]="fileType(upload.mime) === 'unsupport'"
+        >
+          <mat-icon>preview</mat-icon>
+        </button>
+        }
+      </div>
+      } @if(element.certificateAddress) {
+      <p>ที่อยู่ส่งใบประกาศ {{element.certificateAddress.companyName}}</p>
+      } @if(element.receiptAddress) {
+      <p>ที่อยู่ออกใบเสร็จ {{element.receiptAddress.companyName}}</p>
+      }
+    </td>
+  </ng-container>
+
+  <tr
+    mat-header-row
+    *matHeaderRowDef="['registerDate', 'nameOnCertificate', 'email', 'phone', 'registerStatus']"
+  ></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: ['registerDate', 'nameOnCertificate', 'email', 'phone', 'registerStatus']"
+    class="element-row"
+  ></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: ['secondary'];"
+    class="detail-row"
+  ></tr>
+</table>
+<mat-paginator
+  [length]="registrationsPage()?.total"
+  [pageSize]="25"
+  [pageIndex]="registrationsPage()?.page!-1"
+  (page)="handlePageEvent($event)"
+></mat-paginator>
+
+}

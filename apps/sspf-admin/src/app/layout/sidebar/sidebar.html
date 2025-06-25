@@ -1,0 +1,30 @@
+<div class="sidenav-header mb-8">
+  <img
+    [width]="profilePicSize()"
+    [height]="profilePicSize()"
+    src="images/sspf_logo_small.png"
+    alt=""
+  />
+  <div class="header-text" [class.hide-header-text]="sideNavCollapsed()">
+    <h2>ระบบจัดการหลังบ้าน</h2>
+    <p>{{authStore.userProfileResource.value()?.email}}</p>
+  </div>
+</div>
+<mat-nav-list>
+  <a
+    mat-list-item
+    routerLinkActive="selected-menu-item"
+    #rla="routerLinkActive"
+    [activated]="rla.isActive"
+    class="nav-list menu-item"
+    *ngFor="let item of menuItems()"
+    [routerLink]="item.route"
+  >
+    <mat-icon
+      [fontSet]="rla.isActive ? 'material-icons' : 'material-icons-outlined'"
+      matListItemIcon
+      >{{ item.icon }}</mat-icon
+    >
+    <span matListItemTitle *ngIf="!sideNavCollapsed()">{{ item.label }}</span>
+  </a>
+</mat-nav-list>

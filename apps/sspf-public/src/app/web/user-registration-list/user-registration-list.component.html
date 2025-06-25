@@ -1,0 +1,50 @@
+@if(registrationResource.isLoading()) {
+<p>Loading...</p>
+} @else if(registrations()) {
+<h2>หลักสูตรที่ลงทะเบียนที่ผ่านมา</h2>
+<table mat-table [dataSource]="registrations()!" class="w-full">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>ชื่อหลักสูตร</th>
+    <td mat-cell *matCellDef="let element">
+      <a [routerLink]="'/training/courses/' + element['course']['documentId']">
+        {{ element['course'].name }}</a
+      >
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef>วันที่จัดอบรม</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element['course'].startDate | date }}
+      -
+      {{ element['course'].endDate | date }}
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>สถานะการลงทะเบียน</th>
+    <td mat-cell *matCellDef="let element">
+      @switch (element["registerStatus"]) { @case ('REGISTERED') {
+      <p>ลงทะเบียนแล้ว</p>
+      } @case ('PAYMENT_PENDING') {
+      <button
+        [routerLink]="
+          '/training/register-course/' + element['course']['documentId']
+        "
+        matButton="filled"
+      >
+        ส่งหลักฐานการลงทะเบียน
+      </button>
+      } @case ('PAYMENT_RECEIVED') {
+      <p>ส่งหลักฐานการชำระค่าลงทะเบียนแล้ว</p>
+      } @case ('ENROLLED') {
+      <p>ลงทะเบียนสมบูรณ์แล้ว</p>
+      } @case ('WAIT_LIST') {
+      <p>ลงทะเบียนรับรับแจ้งเตือนหากเปิดเพิ่มเติม</p>
+      } }
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="['date', 'name', 'action']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['date', 'name', 'action']"></tr>
+</table>
+} @else {
+<h2>ไม่พบหลักสูตรที่ลงทะเบียน</h2>
+}

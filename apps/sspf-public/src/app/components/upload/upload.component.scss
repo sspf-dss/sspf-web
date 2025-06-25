@@ -1,0 +1,11 @@
+@use '@angular/material' as mat;
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:host {
+  @include mat.list-overrides(
+    (
+      list-item-leading-icon-start-space: 0px,
+      list-item-leading-icon-end-space: 16px,
+    )
+  );
+}

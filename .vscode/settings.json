@@ -1,4 +1,8 @@
 {
-  "tailwindCSS.experimental.configFile": "src/_tailwind.css",
-  "tailwindCSS.lint.invalidConfigPath": "ignore"
+  "tailwindCSS.experimental.configFile": {
+    "apps/sspf-admin/src/_tailwind.css": "apps/sspf-admin/src/**",
+    "apps/sspf-public/src/_tailwind.css": "apps/sspf-public/src/**"
+  },
+  "tailwindCSS.lint.invalidConfigPath": "ignore",
+  "nxConsole.generateAiAgentRules": true
 }

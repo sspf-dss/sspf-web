@@ -1,0 +1,16 @@
+@use '@angular/material' as mat;
+
+$font: var(--mat-sys-display-large-font);
+$size: 16px;
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:host {
+  @include mat.table-overrides(
+    (
+      header-headline-font: $font,
+      header-headline-size: $size,
+      row-item-label-text-font: $font,
+      row-item-label-text-size: $size,
+    )
+  );
+}

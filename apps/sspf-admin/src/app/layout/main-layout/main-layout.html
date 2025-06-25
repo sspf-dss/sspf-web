@@ -1,0 +1,49 @@
+<mat-toolbar class="surface-container-highest flex justify-between">
+  <div>
+    <button mat-icon-button (click)="sidebarCollapse.set(!sidebarCollapse())">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <div class="inline p-4">ระบบจัดการมูลนิธิส่งเสริมวิทยาศาสตร์บริการ</div>
+  </div>
+
+  <div>
+    <button mat-icon-button (click)="toggleDarkMode()">
+      <mat-icon fontSet="material-icons-outlined"
+        >{{ darkModeIcon() }}</mat-icon
+      >
+    </button>
+
+    <button mat-icon-button [matMenuTriggerFor]="paletteMenu">
+      <mat-icon fontSet="material-icons-outlined">palette</mat-icon>
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="userMenu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav [opened]="true" mode="side" [style.width]="sidebarWidth()">
+    <app-sidebar [collapsed]="sidebarCollapse()"></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content [style.margin-left]="sidebarWidth()">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<mat-menu #paletteMenu="matMenu">
+  @for(color of colorList; track color.name ){
+  <button mat-menu-item (click)="changeColor(color.name!)">
+    <mat-icon class="{{ color.name }}-icon">circle</mat-icon>
+    <span>{{ color.name }}</span>
+  </button>
+  }
+</mat-menu>
+
+<mat-menu #userMenu="matMenu">
+  <button mat-menu-item (click)="logout()">
+    <mat-icon>logout</mat-icon>
+    <span>ออกจากระบบ</span>
+  </button>
+</mat-menu>

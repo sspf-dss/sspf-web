@@ -1,0 +1,40 @@
+@use '@angular/material' as mat;
+
+mat-toolbar {
+  background-color: var(--mat-sys-surface-container-highest);
+  box-shadow: var(--mat-sys-level2);
+  position: relative;
+  z-index: 2;
+}
+
+mat-sidenav-container {
+  height: calc(100vh - 64px);
+  background-color: var(--mat-sys-surface-container-lowest);
+}
+
+mat-sidenav {
+  @include mat.sidenav-overrides(
+    (
+      container-shape: 0px,
+    )
+  );
+}
+
+mat-sidenav-content {
+  padding: 24px;
+}
+
+$colors: (
+  'violet': '#7d01fa',
+  'rose': '#ba005d',
+  'azure': '#015cbb',
+);
+@each $color, $hex in $colors {
+  .#{$color}-icon {
+    @include mat.menu-overrides(
+      (
+        item-icon-color: $hex,
+      )
+    );
+  }
+}

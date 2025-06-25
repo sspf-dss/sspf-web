@@ -3,18 +3,57 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "ng serve",
+      "name": "sspf-web Chrome Debugger",
       "type": "chrome",
       "request": "launch",
-      "preLaunchTask": "npm: start",
-      "url": "http://localhost:4200/"
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}/apps/sspf-public/src"
     },
     {
-      "name": "ng test",
+      "name": "sspf-admin Chrome Debugger",
       "type": "chrome",
       "request": "launch",
-      "preLaunchTask": "npm: test",
-      "url": "http://localhost:9876/debug.html"
+      "url": "http://localhost:4201",
+      "webRoot": "${workspaceFolder}/apps/sspf-admin/src"
+    },
+    {
+      "command": "nx serve sspf-web",
+      "name": "Run sspf-web",
+      "cwd": "${workspaceFolder}",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "nx serve sspf-admin",
+      "name": "Run sspf-admin",
+      "cwd": "${workspaceFolder}",
+      "request": "launch",
+      "type": "node-terminal"
     }
+
+    // {
+    //   "name": "Debug sspf-admin",
+    //   "type": "chrome",
+    //   "request": "launch",
+    //   "preLaunchTask": "npm: start:sspf-admin",
+    //   "url": "http://localhost:4201",
+    //   "webRoot": "${workspaceFolder}/apps/sspf-admin/src"
+    // },
+    // {
+    //   "name": "Test sspf-public",
+    //   "type": "chrome",
+    //   "request": "launch",
+    //   "preLaunchTask": "npm: test:sspf-public",
+    //   "url": "http://localhost:9876/debug.html",
+    //   "webRoot": "${workspaceFolder}/apps/sspf-public/src"
+    // }
+    // {
+    //   "name": "Test sspf-admin",
+    //   "type": "chrome",
+    //   "request": "launch",
+    //   "preLaunchTask": "npm: test:sspf-admin",
+    //   "url": "http://localhost:9877/debug.html",
+    //   "webRoot": "${workspaceFolder}/apps/sspf-admin/src"
+    // }
   ]
 }

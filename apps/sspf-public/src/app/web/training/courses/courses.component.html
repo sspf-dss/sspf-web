@@ -1,0 +1,138 @@
+@if(courseResource.isLoading()) {
+<p>Loading....</p>
+} @else if(courseResource.hasValue()){
+<div class="pt-4 sm:pt-4">
+  <!-- Image gallery -->
+  <div class="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:px-8">
+    <img
+      [src]="strapi.url(course()!['topBanner'].url)"
+      class="aspect-42/9 size-full object-cover sm:rounded-lg lg:aspect-42/9"
+      alt="top banner"
+    />
+  </div>
+
+  <!-- Product info -->
+  <div
+    class="mx-auto max-w-2xl px-4 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto_auto_1fr] lg:gap-x-8 lg:px-8 lg:pt-16"
+  >
+    <div class="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+      <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+        หลักสูตร{{ course()!['name'] }}
+      </h1>
+    </div>
+
+    <!-- Options -->
+    <div class="mt-4 lg:row-span-3 lg:mt-0">
+      <h2 class="sr-only">Product information</h2>
+      <p class="text-3xl tracking-tight text-gray-900">
+        ค่าลงทะเบียน {{ course()!['fee'] | number }} บาท
+      </p>
+      <p class="text-2xl tracking-normal text-gray-900">
+        อบรมวันที่ <br />
+        {{ course()!['startDate'] | date }} - {{ course()!['endDate'] | date }}
+      </p>
+
+      @if(course()!['isOnline']) {
+      <p class="text-2xl tracking-normal text-gray-900">อบรมรมผ่านระบบ ZOOM</p>
+      } @else {
+      <p class="text-2xl tracking-normal text-gray-900">
+        อบรมที่ {{ course()!['venue'] }}
+      </p>
+      }
+
+      <p class="text-xl tracking-normal text-red-700">
+        จำนวนที่รับอบรม {{ course()!['participantNumber'] }} ท่าน
+      </p>
+
+      <div class="text-sm tracking-normal text-gray-600">
+        <p class="mb-0">จำนวคนที่ลงทะเบียนแล้ว {{ registeredCount() }} ท่าน</p>
+        <ul class="mt-0 pt-0">
+          <li>
+            รอส่งหลักฐานการชำระค่าลงทะเบียน
+            {{ registrationResource.value()!['PAYMENT_PENDING'] ?? 0 }}
+            ท่าน
+          </li>
+          <li>
+            ชำระค่าลงทะเบียนแล้วรอตรวจสอบ
+            {{ registrationResource.value()!['PAYMENT_RECEIVED'] ?? 0 }}
+            ท่าน
+          </li>
+          <li>
+            ตรวจสอบหลักฐานการชำระค่าลงทะเบียนแล้ว
+            {{ registrationResource.value()!['ENROLLED'] ?? 0 }}
+            ท่าน
+          </li>
+        </ul>
+      </div>
+
+      <div class="mt-10">
+        @if(isFulled()) {
+        <div
+          class="header-font text-xl my-4 text-red-700 bg-red-100 border-red-500 border-1 p-4 rounded-lg text-center"
+        >
+          <p>ลงทะเบียนเต็มแล้ว</p>
+          <p>กดปุ่มด้านล่างเพื่อรับแจ้งเตือนเมื่อเปิดหลักสูตรรุ่นใหม่</p>
+
+          <button
+            mat-flat-button
+            (click)="registerForCourse(course()!['documentId'])"
+          >
+            ลงชื่อรับแจ้งเตือน
+          </button>
+        </div>
+        } @else {
+        <button
+          mat-flat-button
+          (click)="registerForCourse(course()!['documentId'])"
+        >
+          ลงทะเบียน
+        </button>
+        }
+      </div>
+    </div>
+
+    <div
+      class="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pr-8 lg:pb-16"
+    >
+      <!-- Description and details -->
+      <div>
+        <h3 class="sr-only">Description</h3>
+        <!-- {{ course["course_info"].descriptionMD }} -->
+
+        <div
+          markdown
+          class="space-y-6 text-gray-600"
+          [data]="course()!['course_info']['descriptionMD']"
+        ></div>
+      </div>
+
+      <div class="mt-10">
+        <h3 class="text-gray-900 mb-0">วัตถุประสงค์</h3>
+        <div
+          class="mt-0 markdown text-gray-600"
+          markdown
+          [data]="course()!['course_info'].objectiveMD"
+        ></div>
+      </div>
+
+      <div class="mt-10">
+        <h3 class="text-gray-900 mb-0">คุณสมบัติผู้เข้ารับการอบรม</h3>
+        <div
+          class="mt-0 markdown text-gray-600"
+          markdown
+          [data]="course()!['course_info'].requirementMD"
+        ></div>
+      </div>
+
+      <div class="mt-10">
+        <h3 class="text-gray-900 mb-0">หัวข้อหลักสูตร</h3>
+        <div
+          class="mt-0 markdown text-gray-600"
+          markdown
+          [data]="course()!['course_info'].outlineMD"
+        ></div>
+      </div>
+    </div>
+  </div>
+</div>
+}

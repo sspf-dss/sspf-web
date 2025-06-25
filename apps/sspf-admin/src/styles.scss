@@ -1,0 +1,69 @@
+/* You can add global styles to this file, and also import other style files */
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+@use 'tailwind';
+
+@function create-theme($palette) {
+  @return mat.define-theme(
+    (
+      color: (
+        primary: $palette,
+        tertiary: mat.$orange-palette,
+      ),
+      typography: (
+        brand-family: 'Mitr',
+        plain-family: 'Mitr',
+      ),
+      density: (
+        scale: 0,
+      ),
+    )
+  );
+}
+
+$violet-theme: create-theme(mat.$violet-palette);
+
+$palettes: (
+  'violet' mat.$violet-palette create-theme(mat.$violet-palette),
+  'rose' mat.$rose-palette create-theme(mat.$rose-palette),
+  'azure' mat.$azure-palette create-theme(mat.$azure-palette)
+);
+@each $palette-name, $palette, $theme in $palettes {
+  .#{$palette-name}-color {
+    @include mat.theme(
+      (
+        color: (
+          primary: $palette,
+          tertiary: mat.$orange-palette,
+        ),
+        typography: (
+          brand-family: 'Mitr',
+          plain-family: 'Mitr',
+          bold-weight: 700,
+          medium-weight: 500,
+          regular-weight: 300,
+        ),
+        density: 0,
+      )
+    );
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Mitr', 'Helvetica Neue', sans-serif;
+}
+
+body.dark-mode {
+  color-scheme: dark;
+}
+
+body.light-mode {
+  color-scheme: light;
+}

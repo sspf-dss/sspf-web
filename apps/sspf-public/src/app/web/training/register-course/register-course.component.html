@@ -49,7 +49,15 @@
           </div>
         </dl>
 
-        @if(hasRegister() && hasWaitlist()) {
+        @if(!isOpened()) {
+        <div
+          class="mt-10 border-t border-gray-200 pt-6 sm:flex sm:flex-col sm:items-center sm:justify-between"
+        >
+          <div class="mt-4 text-center text-red-700 sm:mt-0 sm:text-left">
+            <p>ปิดการลงทะเบียนแล้ว ขอบคุณที่ให้ความสนใจ</p>
+          </div>
+        </div>
+        } @else if(hasRegister() && hasWaitlist()) {
         <div
           class="mt-10 border-t border-gray-200 pt-6 sm:flex sm:flex-col sm:items-center sm:justify-between"
         >

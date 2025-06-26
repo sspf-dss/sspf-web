@@ -23,6 +23,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UploadComponent } from '../../../components/upload/upload.component';
 import sum from 'lodash-es/sum';
+import { Course } from '@sspf/cms-types';
 
 @Component({
   selector: 'app-register-course',
@@ -101,6 +102,17 @@ export class RegisterCourseComponent implements OnInit {
 
   course = computed(() => {
     return this.courseResource.value()?.data;
+  });
+
+  isOpened = computed(() => {
+    const course = this.courseResource.value()?.data as Course;
+    const now = new Date();
+
+    if (course.endRegisterDate != null && course.endRegisterDate < now) {
+      return true;
+    }
+
+    return false;
   });
 
   isFulled = computed(() => {

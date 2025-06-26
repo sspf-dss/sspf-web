@@ -44,6 +44,8 @@
         จำนวนที่รับอบรม {{ course()!['participantNumber'] }} ท่าน
       </p>
 
+      @if(isOpened()) {
+
       <div class="text-sm tracking-normal text-gray-600">
         <p class="mb-0">จำนวคนที่ลงทะเบียนแล้ว {{ registeredCount() }} ท่าน</p>
         <ul class="mt-0 pt-0">
@@ -64,9 +66,16 @@
           </li>
         </ul>
       </div>
+      }
 
       <div class="mt-10">
-        @if(isFulled()) {
+        @if(!isOpened()) {
+        <div
+          class="header-font text-xl my-4 text-blue-700 bg-blue-100 border-blue-500 border-1 p-4 rounded-lg text-center"
+        >
+          ปิดการลงทะเบียนแล้ว
+        </div>
+        } @else if(isFulled()) {
         <div
           class="header-font text-xl my-4 text-red-700 bg-red-100 border-red-500 border-1 p-4 rounded-lg text-center"
         >
@@ -102,7 +111,7 @@
         <div
           markdown
           class="space-y-6 text-gray-600"
-          [data]="course()!['course_info']['descriptionMD']"
+          [data]="course().course_info?.descriptionMD"
         ></div>
       </div>
 
@@ -111,7 +120,7 @@
         <div
           class="mt-0 markdown text-gray-600"
           markdown
-          [data]="course()!['course_info'].objectiveMD"
+          [data]="course().course_info?.objectiveMD"
         ></div>
       </div>
 
@@ -120,7 +129,7 @@
         <div
           class="mt-0 markdown text-gray-600"
           markdown
-          [data]="course()!['course_info'].requirementMD"
+          [data]="course().course_info?.rquirementMD"
         ></div>
       </div>
 
@@ -129,7 +138,7 @@
         <div
           class="mt-0 markdown text-gray-600"
           markdown
-          [data]="course()!['course_info'].outlineMD"
+          [data]="course().course_info?.outlineMD"
         ></div>
       </div>
     </div>

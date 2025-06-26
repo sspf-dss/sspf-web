@@ -11,7 +11,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { Router } from '@angular/router';
 import { sum } from 'lodash-es';
 import { AuthStore } from '../../../store/auth.store';
-import { RegisterCount } from '@sspf/cms-types';
+import { Course, RegisterCount } from '@sspf/cms-types';
 
 @Component({
   selector: 'app-courses',
@@ -43,7 +43,23 @@ export class CoursesComponent {
   });
 
   course = computed(() => {
-    return this.courseResource.value()?.data;
+    return this.courseResource.value()?.data as Course;
+  });
+
+  isOpened = computed(() => {
+    const now = new Date();
+
+    console.log(`now: ${now}`);
+    console.log(this.course().endRegisterDate);
+
+    if (
+      this.course().endRegisterDate != null &&
+      this.course().endRegisterDate! < now
+    ) {
+      return true;
+    }
+
+    return false;
   });
 
   registrationResource = resource({
@@ -70,7 +86,7 @@ export class CoursesComponent {
     const allReg = sum(Object.values(registerCount)) ?? 0;
     const watiList = registerCount['WAIT_LIST'] ?? 0;
 
-    return allReg - watiList >= this.course()!['participantNumber'];
+    return allReg - watiList >= this.course().participantNumber!;
   });
 
   registerForCourse(documentId: string) {

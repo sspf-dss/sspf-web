@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "sspf-web Chrome Debugger",
+      "name": "sspf-public Chrome Debugger",
       "type": "chrome",
       "request": "launch",
       "url": "http://localhost:4200",

@@ -21,8 +21,8 @@
             <div class="flex-auto space-y-1">
               <h3>{{ course['name'] }}</h3>
               <p class="text-gray-500">
-                อบรมวันที่
-                {{ course['startDate'] | date }} -
+                อบรมวันที่+++
+                {{ course['startDate'] | date }}
                 {{ course['endDate'] | date }}
               </p>
 
@@ -48,7 +48,7 @@
             <dd class="text-base">{{ course['fee'] | number }}</dd>
           </div>
         </dl>
-
+        <!--
         @if(!isOpened()) {
         <div
           class="mt-10 border-t border-gray-200 pt-6 sm:flex sm:flex-col sm:items-center sm:justify-between"
@@ -57,7 +57,9 @@
             <p>ปิดการลงทะเบียนแล้ว ขอบคุณที่ให้ความสนใจ</p>
           </div>
         </div>
-        } @else if(hasRegister() && hasWaitlist()) {
+        } @else  -->
+
+        @if(hasRegister() && hasWaitlist()) {
         <div
           class="mt-10 border-t border-gray-200 pt-6 sm:flex sm:flex-col sm:items-center sm:justify-between"
         >
@@ -66,7 +68,18 @@
             ลงทะเบียนรับข้อมูลเมื่อมีการเปิดหลักสูตรรุ่นใหม่แล้ว
           </div>
         </div>
-        } @else if (hasRegister() && !hasPaymentReceived()) {
+        } @else if (hasRegister() && hasEnrolled()) {
+        <div
+          class="mt-10 border-t border-gray-200 pt-6 sm:flex sm:flex-col sm:items-center sm:justify-between"
+        >
+          <div
+            class="mt-4 text-center text-sm text-gray-500 sm:mt-0 sm:text-left"
+          >
+            เจ้าหน้าที่ตรวจสอบเอกสารการชำระค่าลงทะเบียนเรียบร้อยแล้ว
+            รายละเอียดการเข้าร่วมฝึกอบรมจะจัดส่งให้ทาง email ต่อไป
+          </div>
+        </div>
+        }@else if (hasRegister() && !hasPaymentReceived()) {
         <div
           class="mt-10 border-t border-gray-200 pt-6 sm:flex sm:flex-col sm:items-center sm:justify-between"
         >
@@ -262,6 +275,65 @@
           </button>
           }
         </section>
+        } @else if (hasRegister()) {
+        <section class="mt-10">
+          <h2 class="text-lg font-medium text-grey-900 mb-2">
+            ที่อยู่สำหรับการจัดส่งประกาศนียบัตรและใบเสร็จรับเงิน
+          </h2>
+          <div
+            class="rounded-lg"
+            [ngClass]="{
+                'bg-transparent:': hasRegister(),
+                'px-6 pb-6 pt-4 bg-blue-100 border-blue-300 hover:border-blue-400 border-dashed border-2':
+                  !hasRegister(),
+              }"
+          >
+            <div class="flex flex-row">
+              <app-address-card class="grow" [address]="certificateAddress()" />
+              <div class="flex-none w-8">
+                <button
+                  mat-icon-button
+                  type="button"
+                  *ngIf="!hasRegister()"
+                  (click)="openDrawer('certificate')"
+                  color="primary"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="mt-10">
+          <h2 class="text-lg font-medium text-grey-900 mb-2">
+            ที่อยู่ในใบเสร็จรับเงิน
+          </h2>
+          <div
+            class="rounded-lg"
+            [ngClass]="{
+                'bg-transparent:': hasRegister(),
+                'px-6 pb-6 pt-4 bg-blue-100 border-blue-300 hover:border-blue-400 border-dashed border-2':
+                  !hasRegister(),
+              }"
+          >
+            <div class="flex flex-row">
+              <app-address-card class="grow" [address]="receiptAddress()" />
+              <div class="flex-none w-8">
+                <button
+                  mat-icon-button
+                  type="button"
+                  *ngIf="!hasRegister()"
+                  (click)="openDrawer('certificate')"
+                  color="primary"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
         }
 
         <section aria-labelledby="remark-heading" class="mt-10">

@@ -43,9 +43,16 @@
       </mat-menu>
 
       @if(!authStore.isAuthenticated()) {
-      <button mat-icon-button (click)="login()">
-        <mat-icon>login</mat-icon>
-      </button>
+      <div class="hidden lg:inline">
+        <button mat-button (click)="login()">
+          <mat-icon>login</mat-icon> <span>Login</span>
+        </button>
+      </div>
+      <div class="lg:hidden">
+        <button mat-icon-button (click)="login()">
+          <mat-icon>login</mat-icon>
+        </button>
+      </div>
       } @else {
       <button mat-icon-button [matMenuTriggerFor]="userMenu">
         <mat-icon>account_circle</mat-icon>

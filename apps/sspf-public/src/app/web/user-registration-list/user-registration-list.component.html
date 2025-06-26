@@ -6,7 +6,11 @@
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>ชื่อหลักสูตร</th>
     <td mat-cell *matCellDef="let element">
-      <a [routerLink]="'/training/courses/' + element['course']['documentId']">
+      <a
+        [routerLink]="
+          '/training/register-course/' + element['course']['documentId']
+        "
+      >
         {{ element['course'].name }}</a
       >
     </td>
@@ -31,7 +35,7 @@
         "
         matButton="filled"
       >
-        ส่งหลักฐานการลงทะเบียน
+        ส่งหลักฐานการชำระค่าลงทะเบียน
       </button>
       } @case ('PAYMENT_RECEIVED') {
       <p>ส่งหลักฐานการชำระค่าลงทะเบียนแล้ว</p>

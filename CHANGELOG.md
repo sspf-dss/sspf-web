@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.1](https://github.com/sspf-dss/sspf-web/compare/v0.4.0...v0.4.1) (2025-06-26)
+
+
+### Bug Fixes
+
+* **add endregisterdate logic:** when endRegisterDate is less than now isOpened is true ([ce7d1c7](https://github.com/sspf-dss/sspf-web/commit/ce7d1c72bb89d5b507d9c6bd71e9a4360d3c4f9c))
+
 ## [0.4.0](https://github.com/sspf-dss/sspf-web/compare/v0.3.7...v0.4.0) (2025-06-25)
 
 

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.2](https://github.com/sspf-dss/sspf-web/compare/v0.4.1...v0.4.2) (2025-06-26)
+
+
+### Features
+
+* **registration status text:** fix registration text in various page to display according to status ([11ab5de](https://github.com/sspf-dss/sspf-web/commit/11ab5de5f0c16f796d544aeef261f0f7edd33b7b))
+
 ### [0.4.1](https://github.com/sspf-dss/sspf-web/compare/v0.4.0...v0.4.1) (2025-06-26)
 
 

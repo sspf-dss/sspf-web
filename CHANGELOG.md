@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.3](https://github.com/sspf-dss/sspf-web/compare/v0.4.2...v0.4.3) (2025-07-01)
+
+
+### Features
+
+* **show address for admin:** show addresses in the admin page ([355b07a](https://github.com/sspf-dss/sspf-web/commit/355b07ad8f2d843bacd5a2ee5aa7e4943bf88ae5))
+
 ### [0.4.2](https://github.com/sspf-dss/sspf-web/compare/v0.4.1...v0.4.2) (2025-06-26)
 
 

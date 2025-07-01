@@ -19,6 +19,7 @@ import {
   MatDialog,
   MatDialogModule,
 } from '@angular/material/dialog';
+import { AddressLine } from '../../components/address-line';
 
 @Component({
   selector: 'app-courses-register',
@@ -28,6 +29,7 @@ import {
     MatPaginatorModule,
     MatButtonModule,
     MatIconModule,
+    AddressLine,
   ],
   templateUrl: './courses-register.html',
   styleUrl: './courses-register.scss',

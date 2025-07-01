@@ -1,0 +1,21 @@
+@let a = addr();
+
+<div>
+  @if (a.companyName) {
+    {{ a.companyName }}
+  }
+</div>
+@if (a.taxId) {
+  <div>เลขประจำตัวผู้เสียภาษี {{ a.taxId }}</div>
+}
+@if (a.contactName) {
+  <div>ผู้ประสานงาน {{ a.contactName }}</div>
+}
+<div>
+  {{ a.line1 }}
+</div>
+<div>
+  {{ a.line2 }}
+</div>
+<div>{{ subDistrictTxt() }} {{ districtTxt() }}</div>
+<div>{{ provinceTxt() }} {{ a.zip }}</div>

@@ -94,7 +94,7 @@ export type CourseInfo = API.Document & {
   course?: Course;
   descriptionMD?: string;
   objectiveMD?: string;
-  rquirementMD?: string;
+  requirementMD?: string;
   outlineMD?: string;
 };
 

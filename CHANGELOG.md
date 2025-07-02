@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.4](https://github.com/sspf-dss/sspf-web/compare/v0.4.3...v0.4.4) (2025-07-02)
+
+
+### Bug Fixes
+
+* fix upload button to appear running when click upload ([d3b7b06](https://github.com/sspf-dss/sspf-web/commit/d3b7b06e37aba4d1fd400bd15bed52aee031952b))
+
 ### [0.4.3](https://github.com/sspf-dss/sspf-web/compare/v0.4.2...v0.4.3) (2025-07-01)
 
 

@@ -35,7 +35,6 @@ export class MainLayout implements OnInit {
       window.matchMedia &&
       window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    console.log(`darkModeOn: ${darkModeOn}`);
     this.darkMode.set(darkModeOn);
 
     if (darkModeOn) {
@@ -54,8 +53,6 @@ export class MainLayout implements OnInit {
 
   changeColor(color: string) {
     const colorClass = this.colorList.map((c) => c.name + '-color');
-
-    console.log(colorClass);
 
     document.body.classList.remove(...colorClass);
     document.body.classList.add(`${color}-color`);

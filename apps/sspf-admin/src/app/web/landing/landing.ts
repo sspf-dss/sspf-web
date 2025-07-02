@@ -13,7 +13,7 @@ export class Landing {
   authStore = inject(AuthStore);
 
   login() {
-    console.log(window.location.origin + '/admin');
+    // console.log(window.location.origin + '/admin');
     this.authStore.login({ redirectUri: window.location.origin + '/admin' });
   }
 }

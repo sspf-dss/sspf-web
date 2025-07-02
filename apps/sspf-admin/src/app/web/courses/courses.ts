@@ -14,13 +14,9 @@ import { Router } from '@angular/router';
   templateUrl: './courses.html',
   styleUrl: './courses.scss',
 })
-export class Courses implements OnInit {
+export class Courses {
   strapi = inject(StrapiStore);
   readonly route = inject(Router);
-
-  ngOnInit(): void {
-    console.log(environment.cmsUrl);
-  }
 
   coursesResource = resource({
     loader: async ({ abortSignal }) => {

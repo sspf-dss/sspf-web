@@ -49,9 +49,6 @@ export class CoursesComponent {
   isOpened = computed(() => {
     const now = new Date();
 
-    console.log(`now: ${now}`);
-    console.log(this.course().endRegisterDate);
-
     if (
       this.course().endRegisterDate != null &&
       this.course().endRegisterDate! < now
@@ -97,7 +94,7 @@ export class CoursesComponent {
         redirectUri: `${window.location.protocol}//${
           window.location.host
         }${this.location.prepareExternalUrl(
-          '/training/register-course'
+          '/training/register-course',
         )}/${documentId}`,
       });
     }

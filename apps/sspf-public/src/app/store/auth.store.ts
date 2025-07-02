@@ -51,7 +51,7 @@ export const AuthStore = signalStore(
   })),
   withComputed((store) => ({
     hasAuthenticated: computed(() =>
-      store.isAuthenticated() ? true : undefined
+      store.isAuthenticated() ? true : undefined,
     ),
     profile: computed(() => store.userProfileResource.value()),
   })),
@@ -67,7 +67,7 @@ export const AuthStore = signalStore(
   })),
   withMethods((store) => ({
     _updateAuth: signalMethod<KeycloakEvent>((event) => {
-      console.log(event);
+      // console.log(event);
       if (event.type === KeycloakEventType.Ready) {
         patchState(store, {
           isAuthenticated: typeEventArgs<ReadyArgs>(event.args),
@@ -89,5 +89,5 @@ export const AuthStore = signalStore(
     onInit(store) {
       store._updateAuth(store._keycloakEventSignal);
     },
-  })
+  }),
 );

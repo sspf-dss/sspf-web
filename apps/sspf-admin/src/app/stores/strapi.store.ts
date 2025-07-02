@@ -83,12 +83,7 @@ export const StrapiStore = signalStore(
       return STRAPI_URL + path;
     },
   })),
-  withHooks(() => ({
-    onInit: () => {
-      console.log(`API_KEY: ${API_KEY}`);
-      console.log(`STRAPI_URL: ${BASE_URL}`);
-    },
-  }))
+  withHooks(() => ({})),
   // withHooks((store) => ({
   //   onInit: () => {
   //     effect(() => {

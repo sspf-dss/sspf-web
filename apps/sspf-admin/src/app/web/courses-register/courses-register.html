@@ -147,11 +147,20 @@
                 </button>
 
                 <button
-                  matButton="filled"
+                  mat-icon-button
+                  class="blue-icon"
                   (click)="startUpload(row_index, element.documentId)"
                   [disabled]="isStartUploading[row_index]"
                 >
-                  <mat-icon>save</mat-icon> <span>save</span>
+                  <mat-icon>save</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  class="red-icon"
+                  (click)="cancelUpload(row_index)"
+                  [disabled]="isStartUploading[row_index]"
+                >
+                  <mat-icon>cancel</mat-icon>
                 </button>
               }
             }

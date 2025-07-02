@@ -60,7 +60,7 @@ export class CoursesRegister {
   registrationsCurrentPage = signal<number>(0);
   registrationsCurrentPageSize = signal<number>(25);
 
-  receiptFiles: FileInfo[] = [];
+  receiptFiles: (FileInfo | undefined)[] = [];
 
   courseResource = resource({
     params: () => ({ courseId: this.courseId() }),
@@ -155,19 +155,24 @@ export class CoursesRegister {
         const reader = new FileReader();
 
         reader.onload = (e: any) => {
-          console.log('onload!');
+          // console.log('onload!');
           this.receiptFiles[index] = {
             file: file,
             preview: e.target.result,
             type: this.fileType(file.type),
             name: file.name,
           };
-          console.log(this.receiptFiles[index]);
+          // console.log(this.receiptFiles[index]);
         };
 
         reader.readAsDataURL(file);
       }
     }
+  }
+
+  cancelUpload(index: number) {
+    this.receiptFiles[index] = undefined;
+    this.isStartUploading[index] = false;
   }
 
   async startUpload(index: number, registrationId: string) {

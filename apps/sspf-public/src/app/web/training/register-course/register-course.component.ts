@@ -108,9 +108,6 @@ export class RegisterCourseComponent implements OnInit {
     const course = this.courseResource.value()?.data as Course;
     const now = new Date();
 
-    console.log(`now: ${now}`);
-    console.log(course.endRegisterDate);
-
     if (course.endRegisterDate != null && course.endRegisterDate < now) {
       return true;
     }

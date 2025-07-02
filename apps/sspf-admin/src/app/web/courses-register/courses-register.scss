@@ -1,3 +1,22 @@
+@use '@angular/material' as mat;
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+.red-icon {
+  @include mat.icon-button-overrides(
+    (
+      icon-color: red,
+    )
+  );
+}
+
+.blue-icon {
+  @include mat.icon-button-overrides(
+    (
+      icon-color: blue,
+    )
+  );
+}
+
 .mat-mdc-cell {
   vertical-align: top;
 }

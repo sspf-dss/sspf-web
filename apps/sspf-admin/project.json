@@ -4,6 +4,11 @@
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "apps/sspf-admin/src",
+  "generators": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    }
+  },
   "tags": [],
   "targets": {
     "build": {
@@ -19,6 +24,11 @@
           {
             "glob": "**/*",
             "input": "apps/sspf-admin/public"
+          },
+          {
+            "glob": "**/*",
+            "input": "node_modules/ngx-extended-pdf-viewer/assets/",
+            "output": "assets"
           }
         ],
         "styles": ["apps/sspf-admin/src/styles.scss"]

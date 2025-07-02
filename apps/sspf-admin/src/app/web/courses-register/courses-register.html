@@ -63,10 +63,35 @@
 
     <!-- Secondary Column -->
     <ng-container matColumnDef="secondary">
-      <td mat-cell [attr.colspan]="6" *matCellDef="let element">
-        @if (element.uploads && element.uploads.length > 0) {
-          <div class="flex items-center">
-            <span>หลักฐานการโอนเงิน</span>
+      <td
+        mat-cell
+        [attr.colspan]="5"
+        *matCellDef="let element; let i = dataIndex"
+      >
+        @let row_index = paginatorRef.pageIndex * paginatorRef.pageSize + i;
+        <div>
+          <span class="font-medium pr-2">สถานะการลงทะเบียน:</span>
+          @switch (element.registerStatus) {
+            @case ('REGISTERED') {
+              <span>ลงทะเบียนแล้ว-ไม่ใช้</span>
+            }
+            @case ('PAYMENT_PENDING') {
+              <span>รอส่งหลักฐานชำระค่าลงทะเบียน</span>
+            }
+            @case ('PAYMENT_RECEIVED') {
+              <span>รอตรวจสอบหลักฐานชำระค่าลงทะเบียน</span>
+            }
+            @case ('ENROLLED') {
+              <span>ตรวจสอบออกใบเสร็จแล้ว</span>
+            }
+            @case ('WAIT_LIST') {
+              <span>จองลงทะเบียน</span>
+            }
+          }
+        </div>
+        <div class="flex items-center">
+          @if (element.uploads && element.uploads.length > 0) {
+            <span class="font-medium">หลักฐานการโอนเงิน</span>
             @for (upload of element.uploads; track upload.id) {
               <button
                 mat-icon-button
@@ -76,8 +101,63 @@
                 <mat-icon>preview</mat-icon>
               </button>
             }
-          </div>
-        }
+          }
+          @if (element.receipt) {
+            <span class="font-medium pl-4">ใบเสร็จรับเงิน</span>
+            <button
+              mat-icon-button
+              (click)="
+                openUpload(element.receipt.url, fileType(element.receipt.mime))
+              "
+              [disabled]="fileType(element.receipt.mime) === 'unsupport'"
+            >
+              <mat-icon>preview</mat-icon>
+            </button>
+          } @else {
+            @if (isStartUploading[row_index]) {
+              <button mat-button disabled="true">
+                Uploading<mat-progress-bar
+                  mode="buffer"
+                  class="inline"
+                ></mat-progress-bar>
+              </button>
+            } @else {
+              <button
+                mat-button
+                (click)="f_input.click()"
+                [disabled]="isStartUploading[row_index]"
+              >
+                upload ใบเสร็จรับเงิน
+              </button>
+
+              <input
+                hidden
+                type="file"
+                #f_input
+                (change)="selectFiles($event, row_index)"
+              />
+
+              @if (receiptFiles[row_index]?.file) {
+                <button
+                  mat-icon-button
+                  (click)="openPreview(row_index)"
+                  [disabled]="receiptFiles[row_index]?.type === 'unsupport'"
+                >
+                  <mat-icon>preview</mat-icon>
+                </button>
+
+                <button
+                  matButton="filled"
+                  (click)="startUpload(row_index, element.documentId)"
+                  [disabled]="isStartUploading[row_index]"
+                >
+                  <mat-icon>save</mat-icon> <span>save</span>
+                </button>
+              }
+            }
+          }
+        </div>
+
         @if (element.registerStatus !== 'WAIT_LIST') {
           <div
             class="sm:grid sm:grid-cols-2 sm:items-start sm:gap-2 sm:pt-0 pb-4"
@@ -119,7 +199,6 @@
         'nameOnCertificate',
         'email',
         'phone',
-        'registerStatus',
       ]"
     ></tr>
     <tr
@@ -132,7 +211,6 @@
           'nameOnCertificate',
           'email',
           'phone',
-          'registerStatus',
         ]
       "
       class="element-row"

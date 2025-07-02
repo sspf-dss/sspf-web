@@ -12,7 +12,7 @@ export class AddressLine {
   addr = input.required<Address>();
   label = input<string>();
 
-  isBangkok = computed(() => this.addr().province?.id === 78);
+  isBangkok = computed(() => this.addr().province?.nameTh === 'กรุงเทพมหานคร');
 
   subDistrictTxt = computed(
     () =>

@@ -64,7 +64,7 @@ export class RegisterCourseComponent implements OnInit {
           'OK',
           {
             duration: 8000,
-          }
+          },
         );
       }
 
@@ -74,7 +74,7 @@ export class RegisterCourseComponent implements OnInit {
           'OK',
           {
             duration: 8000,
-          }
+          },
         );
       }
 
@@ -335,7 +335,7 @@ export class RegisterCourseComponent implements OnInit {
       })
       .then((resp) => resp.json());
 
-    console.log(uploadResp);
+    // console.log(uploadResp);
     const uploadIds = uploadResp.map((u: any) => u.id);
     const data = {
       data: {

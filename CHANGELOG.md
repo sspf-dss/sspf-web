@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.5](https://github.com/sspf-dss/sspf-web/compare/v0.4.4...v0.4.5) (2025-07-02)
+
+
+### Bug Fixes
+
+* **remove console.log:** remove console.log ([832c1a0](https://github.com/sspf-dss/sspf-web/commit/832c1a0224456e637a6a3327791d90672e88e4bc))
+
 ### [0.4.4](https://github.com/sspf-dss/sspf-web/compare/v0.4.3...v0.4.4) (2025-07-02)
 
 

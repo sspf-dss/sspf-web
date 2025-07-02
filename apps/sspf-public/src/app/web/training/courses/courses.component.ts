@@ -48,15 +48,17 @@ export class CoursesComponent {
 
   isOpened = computed(() => {
     const now = new Date();
+    if (this.course().endRegisterDate) {
+      const endRegisterDate = new Date(this.course().endRegisterDate as Date);
 
-    if (
-      this.course().endRegisterDate != null &&
-      this.course().endRegisterDate! < now
-    ) {
+      if (endRegisterDate > now) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
       return true;
     }
-
-    return false;
   });
 
   registrationResource = resource({

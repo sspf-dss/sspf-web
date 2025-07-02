@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.8](https://github.com/sspf-dss/sspf-web/compare/v0.4.7...v0.4.8) (2025-07-02)
+
+
+### Bug Fixes
+
+* **typo:** requirementMD typo ([9b0b26f](https://github.com/sspf-dss/sspf-web/commit/9b0b26f61bef0f4c9efd8c469ef30abb951c6ecd))
+
 ### [0.4.7](https://github.com/sspf-dss/sspf-web/compare/v0.4.6...v0.4.7) (2025-07-02)
 
 

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.6](https://github.com/sspf-dss/sspf-web/compare/v0.4.5...v0.4.6) (2025-07-02)
+
+
+### Bug Fixes
+
+* fix date comparison of endRegisterDate ([a3e9e42](https://github.com/sspf-dss/sspf-web/commit/a3e9e42023bd61c7ad29a7b36a9d27c58518cb26))
+
 ### [0.4.5](https://github.com/sspf-dss/sspf-web/compare/v0.4.4...v0.4.5) (2025-07-02)
 
 

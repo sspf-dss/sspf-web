@@ -1,4 +1,6 @@
-<h3>หลักสูตรฝึกอบรม</h3>
+<button mat-button routerLink="/admin/courses">
+  <mat-icon>keyboard_arrow_left</mat-icon>หน้าหลักสูตรฝึกอบรม
+</button>
 @if (course()) {
   <p>{{ course().name }}</p>
 }
@@ -69,7 +71,7 @@
         *matCellDef="let element; let i = dataIndex"
       >
         @let row_index = paginatorRef.pageIndex * paginatorRef.pageSize + i;
-        <div>
+        <div class="flex items-center">
           <span class="font-medium pr-2">สถานะการลงทะเบียน:</span>
           @switch (element.registerStatus) {
             @case ('REGISTERED') {
@@ -87,6 +89,19 @@
             @case ('WAIT_LIST') {
               <span>จองลงทะเบียน</span>
             }
+            @case ('CANCELLED') {
+              <span>ยกเลิกการลงทะเบียน</span>
+            }
+          }
+          <div class="flex-auto"></div>
+          @if (element.registerStatus !== 'CANCELLED') {
+            <button
+              mat-button
+              class="red-icon"
+              (click)="cancelRegistration(element)"
+            >
+              <mat-icon>cancel</mat-icon><span>ยกเลิกการลงทะเบียน</span>
+            </button>
           }
         </div>
         <div class="flex items-center">

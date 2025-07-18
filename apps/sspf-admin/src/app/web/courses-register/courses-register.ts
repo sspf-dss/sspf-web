@@ -21,9 +21,16 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
+  MatDialogActions,
+  MatDialogConfig,
+  MatDialogContainer,
+  MatDialogContent,
   MatDialogModule,
+  MatDialogRef,
 } from '@angular/material/dialog';
 import { AddressLine } from '../../components/address-line';
+import { A } from 'node_modules/@angular/cdk/activedescendant-key-manager.d-Bjic5obv';
+import { RouterModule } from '@angular/router';
 
 type FileInfo = {
   file: File;
@@ -43,6 +50,7 @@ type FileInfo = {
     AddressLine,
     MatSnackBarModule,
     MatProgressBarModule,
+    RouterModule,
   ],
   templateUrl: './courses-register.html',
   styleUrl: './courses-register.scss',
@@ -169,6 +177,27 @@ export class CoursesRegister {
       }
     }
   }
+  cancelRegistration(registration: Registration) {
+    // open confirmation dialog
+    const dialogRef = this.dialog.open(RegistrationConfirmationDialog, {
+      data: registration,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.strapi
+          .client()
+          .collection('registrations')
+          .update(registration.documentId, { registerStatus: 'CANCELLED' })
+          .then((r) => {
+            registration.registerStatus = 'CANCELLED';
+            this.sb.open('ยกเลิกการลงทะเบียนเรียบร้อย', 'OK', {
+              duration: 8000,
+            });
+          });
+      }
+    });
+  }
 
   cancelUpload(index: number) {
     this.receiptFiles[index] = undefined;
@@ -199,6 +228,47 @@ export class CoursesRegister {
       this.sb.open('Upload Receipt Success', 'OK', { duration: 8000 });
       this.isStartUploading[index] = false;
     }
+  }
+}
+
+@Component({
+  selector: 'app-registration-confirm-dialog',
+  standalone: true,
+  template: `
+    <p mat-dialog-title class="mx-8 mb-0">ยกเลิกการลงทะเบียน</p>
+    <mat-dialog-content>
+      <div class="mx-8 mt-0 pt-0">
+        <p>
+          <span class="font-medium">ชื่อผู้ลงทะเบียน:</span>
+          {{ data.nameOnCertificate }}
+        </p>
+        <p><span class="font-medium">Email: </span>{{ data.email }}</p>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button matButton (click)="onNoClick()">ไม่ยกเลิก</button>
+      <button
+        matButton
+        class="red-button"
+        cdkFocusInitial
+        (click)="onYesClick()"
+      >
+        ยกเลิก
+      </button>
+    </mat-dialog-actions>
+  `,
+  imports: [CommonModule, MatButtonModule, MatDialogContent, MatDialogActions],
+})
+export class RegistrationConfirmationDialog {
+  dialogRef = inject(MatDialogRef<RegistrationConfirmationDialog>);
+  data: Registration = inject(MAT_DIALOG_DATA);
+
+  onNoClick(): void {
+    this.dialogRef.close(false);
+  }
+
+  onYesClick(): void {
+    this.dialogRef.close(true);
   }
 }
 

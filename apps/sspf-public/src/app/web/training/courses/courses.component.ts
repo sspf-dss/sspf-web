@@ -83,9 +83,10 @@ export class CoursesComponent {
   isFulled = computed(() => {
     const registerCount = this.registrationResource.value()!;
     const allReg = sum(Object.values(registerCount)) ?? 0;
-    const watiList = registerCount['WAIT_LIST'] ?? 0;
+    const waitList = registerCount['WAIT_LIST'] ?? 0;
+    const cancelled = registerCount['CANCELLED'] ?? 0;
 
-    return allReg - watiList >= this.course().participantNumber!;
+    return allReg - waitList - cancelled >= this.course().participantNumber!;
   });
 
   registerForCourse(documentId: string) {

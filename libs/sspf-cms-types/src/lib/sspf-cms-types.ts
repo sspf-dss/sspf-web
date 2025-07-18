@@ -117,7 +117,8 @@ export type RegisterStatus =
   | 'PAYMENT_PENDING'
   | 'PAYMENT_RECEIVED'
   | 'ENROLLED'
-  | 'WAIT_LIST';
+  | 'WAIT_LIST'
+  | 'CANCELLED';
 
 export type RegisterCount = {
   [key in RegisterStatus]: number | undefined;

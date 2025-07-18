@@ -7,6 +7,12 @@
       icon-color: red,
     )
   );
+
+  @include mat.button-overrides(
+    (
+      text-label-text-color: red,
+    )
+  );
 }
 
 .blue-icon {

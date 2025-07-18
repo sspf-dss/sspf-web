@@ -67,3 +67,11 @@ body.dark-mode {
 body.light-mode {
   color-scheme: light;
 }
+
+.red-button {
+  @include mat.button-overrides(
+    (
+      text-label-text-color: red,
+    )
+  );
+}

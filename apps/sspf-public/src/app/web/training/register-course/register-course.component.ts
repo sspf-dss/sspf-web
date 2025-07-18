@@ -118,9 +118,10 @@ export class RegisterCourseComponent implements OnInit {
   isFulled = computed(() => {
     const registerCount = this.registrationCountResource.value();
     const allReg = sum(Object.values(registerCount)) ?? 0;
-    const watiList = registerCount['WAIT_LIST'] ?? 0;
+    const waitList = registerCount['WAIT_LIST'] ?? 0;
+    const cancelled = registerCount['CANCELLED'] ?? 0;
 
-    return allReg - watiList >= this.course()!['participantNumber'];
+    return allReg - waitList - cancelled >= this.course()!['participantNumber'];
   });
 
   readonly strapi = inject(StrapiStore);
@@ -138,6 +139,12 @@ export class RegisterCourseComponent implements OnInit {
     receiptAddress: ['', Validators.required],
     certificateAddress: ['', Validators.required],
     remark: [''],
+  });
+
+  registerStatus = computed(() => {
+    return this.registrationResource.hasValue()
+      ? this.registrationResource.value()[0]!['registerStatus']
+      : undefined;
   });
 
   hasRegister = computed(() => {

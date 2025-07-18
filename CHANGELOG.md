@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.9](https://github.com/sspf-dss/sspf-web/compare/v0.4.8...v0.4.9) (2025-07-18)
+
+
+### Features
+
+* **add cancelled registerstatus:** add RegisterStatus CANCELLED State ([ff2344d](https://github.com/sspf-dss/sspf-web/commit/ff2344d74e3ac31951978240563e886afa99d891))
+
 ### [0.4.8](https://github.com/sspf-dss/sspf-web/compare/v0.4.7...v0.4.8) (2025-07-02)
 
 

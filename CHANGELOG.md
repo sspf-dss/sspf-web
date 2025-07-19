@@ -1,3 +1,7 @@
+# 1.0.0 (2025-07-19)
+
+This was a version bump only, there were no code changes.
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.

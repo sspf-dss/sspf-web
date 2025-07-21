@@ -1,3 +1,13 @@
+## 1.1.0 (2025-07-21)
+
+### 🩹 Fixes
+
+- **fixed npe on registerstatus and adding instructore page for admin:** adding new Page and fix NPE ([6d27902](https://github.com/sspf-dss/sspf-web/commit/6d27902))
+
+### ❤️ Thank You
+
+- dbuaklee
+
 # 1.0.0 (2025-07-19)
 
 This was a version bump only, there were no code changes.

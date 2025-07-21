@@ -33,5 +33,10 @@ export class Sidebar {
       label: 'หลักสูตรฝึกอบรม',
       route: '/admin/courses',
     },
+    {
+      icon: 'account_box',
+      label: 'รายชื่อวิทยากร',
+      route: '/admin/instructors',
+    },
   ]);
 }

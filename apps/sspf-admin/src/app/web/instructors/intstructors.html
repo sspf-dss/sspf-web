@@ -1,0 +1,16 @@
+<p>รายชื่อวิทยากร</p>
+
+@if (instructors()) {
+  <table mat-table [dataSource]="instructors()!">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>ชื่อ-นามสกุล</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.title }}{{ element.firstName }} {{ element.lastName }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['name']"></tr>
+
+    <tr mat-row *matRowDef="let row; columns: ['name']"></tr>
+  </table>
+}

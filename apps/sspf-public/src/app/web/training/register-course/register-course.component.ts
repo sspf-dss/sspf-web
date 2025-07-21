@@ -142,9 +142,13 @@ export class RegisterCourseComponent implements OnInit {
   });
 
   registerStatus = computed(() => {
-    return this.registrationResource.hasValue()
-      ? this.registrationResource.value()[0]!['registerStatus']
-      : undefined;
+    if (
+      this.registrationResource.hasValue() &&
+      this.registrationCountResource.value().length > 0
+    ) {
+      return this.registrationResource.value()[0]?.['registerStatus'];
+    }
+    return undefined;
   });
 
   hasRegister = computed(() => {

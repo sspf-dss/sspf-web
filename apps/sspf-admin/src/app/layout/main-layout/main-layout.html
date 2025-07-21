@@ -1,5 +1,7 @@
-<mat-toolbar class="surface-container-highest flex justify-between">
-  <div>
+<mat-toolbar
+  class="surface-container-highest flex justify-between items-center"
+>
+  <div class="flex items-center">
     <button mat-icon-button (click)="sidebarCollapse.set(!sidebarCollapse())">
       <mat-icon>menu</mat-icon>
     </button>
@@ -9,9 +11,9 @@
 
   <div>
     <button mat-icon-button (click)="toggleDarkMode()">
-      <mat-icon fontSet="material-icons-outlined"
-        >{{ darkModeIcon() }}</mat-icon
-      >
+      <mat-icon fontSet="material-icons-outlined">{{
+        darkModeIcon()
+      }}</mat-icon>
     </button>
 
     <button mat-icon-button [matMenuTriggerFor]="paletteMenu">
@@ -33,11 +35,11 @@
 </mat-sidenav-container>
 
 <mat-menu #paletteMenu="matMenu">
-  @for(color of colorList; track color.name ){
-  <button mat-menu-item (click)="changeColor(color.name!)">
-    <mat-icon class="{{ color.name }}-icon">circle</mat-icon>
-    <span>{{ color.name }}</span>
-  </button>
+  @for (color of colorList; track color.name) {
+    <button mat-menu-item (click)="changeColor(color.name!)">
+      <mat-icon class="{{ color.name }}-icon">circle</mat-icon>
+      <span>{{ color.name }}</span>
+    </button>
   }
 </mat-menu>
 

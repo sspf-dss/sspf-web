@@ -26,10 +26,17 @@ export const appRoutes: Route[] = [
             path: 'registrations/:courseId',
             loadComponent: () =>
               import('./web/courses-register/courses-register').then(
-                (mod) => mod.CoursesRegister
+                (mod) => mod.CoursesRegister,
               ),
           },
         ],
+      },
+      {
+        path: 'instructors',
+        loadComponent: () =>
+          import('./web/instructors/intstructors').then(
+            (mod) => mod.Intstructors,
+          ),
       },
       {
         path: 'dashboard',

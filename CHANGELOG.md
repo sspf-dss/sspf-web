@@ -1,3 +1,13 @@
+## 1.2.0 (2025-09-24)
+
+### 🚀 Features
+
+- update angular and nodejs to current version ([0dbdb6a](https://github.com/sspf-dss/sspf-web/commit/0dbdb6a))
+
+### ❤️ Thank You
+
+- dbuaklee
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.

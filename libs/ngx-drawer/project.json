@@ -11,11 +11,12 @@
         "production": {
           "tsConfig": "libs/ngx-drawer/tsconfig.lib.prod.json"
         },
-        "development": {
-          "tsConfig": "libs/ngx-drawer/tsconfig.lib.json"
-        }
+        "development": {}
       },
-      "defaultConfiguration": "production"
+      "defaultConfiguration": "production",
+      "options": {
+        "tsConfig": "libs/ngx-drawer/tsconfig.lib.json"
+      }
     },
     "test": {
       "executor": "@angular/build:karma",

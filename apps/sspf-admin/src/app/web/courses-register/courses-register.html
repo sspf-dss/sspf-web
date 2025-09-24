@@ -3,6 +3,7 @@
 </button>
 @if (course()) {
   <p>{{ course().name }}</p>
+  now show filtering
 }
 @if (registrations()) {
   <table mat-table [dataSource]="registrations()" multiTemplateDataRows>

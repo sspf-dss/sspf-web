@@ -1,3 +1,13 @@
+## 1.3.1 (2025-12-12)
+
+### 🩹 Fixes
+
+- update rich data structure for website ([0011a72](https://github.com/sspf-dss/sspf-web/commit/0011a72))
+
+### ❤️ Thank You
+
+- dbuaklee
+
 ## 1.3.0 (2025-12-12)
 
 ### 🚀 Features

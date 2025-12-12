@@ -87,8 +87,14 @@
             @case ('ENROLLED') {
               <span>ตรวจสอบออกใบเสร็จแล้ว</span>
             }
+            @case ('WAIT_LIST_OPEN') {
+              <span>เปิดผู้จองให้ลงทะเบียน</span>
+            }
             @case ('WAIT_LIST') {
               <span>จองลงทะเบียน</span>
+              <button mat-button (click)="waitListOpen(element)">
+                <mat-icon>add_box</mat-icon><span>เปิดให้ลงทะเบียน</span>
+              </button>
             }
             @case ('CANCELLED') {
               <span>ยกเลิกการลงทะเบียน</span>
@@ -101,7 +107,7 @@
               class="red-button"
               (click)="cancelRegistration(element)"
             >
-              <mat-icon>cancel</mat-icon><span>ยกเลิกการลงทะเบียน</span>
+              <mat-icon>close</mat-icon><span>ยกเลิกการลงทะเบียน</span>
             </button>
           }
         </div>

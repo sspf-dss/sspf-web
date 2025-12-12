@@ -24,6 +24,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UploadComponent } from '../../../components/upload/upload.component';
 import sum from 'lodash-es/sum';
 import { Course } from '@sspf/cms-types';
+import { has } from 'lodash-es';
 
 @Component({
   selector: 'app-register-course',
@@ -280,15 +281,26 @@ export class RegisterCourseComponent implements OnInit {
       },
     };
 
-    this.strapi.client().fetch('/registrations/waitlist', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    this.registrationResource.reload();
+    this.strapi
+      .client()
+      .fetch('/registrations/waitlist', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((resp) => {
+        this.sb.open(
+          'ลงทะเบียนการแจ้งเตือนสำเร็จ หากมีการขยายจำนวนผู้เข้าอบรม หรือมีผู้ยกเลิกการลงทะเบียนจะมีเจ้าหน้าที่แจ้งให้ท่านทราบ',
+          'OK',
+          { duration: 8000 },
+        );
+        this.registrationResource.reload();
+      })
+      .catch((err) => {
+        this.sb.open(err, 'OK', { duration: 8000 });
+      });
   }
 
   async register() {
@@ -317,13 +329,12 @@ export class RegisterCourseComponent implements OnInit {
       })
       .then((resp) => {
         this.sb.open('ลงทะเบียนสำเร็จ', 'OK', { duration: 8000 });
+        this.registrationResource.reload();
         return resp.data;
       })
       .catch((err) => {
         this.sb.open(err, 'OK', { duration: 8000 });
       });
-
-    this.registrationResource.reload();
   }
 
   async startUpload(files: File[]) {

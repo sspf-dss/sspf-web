@@ -21,7 +21,9 @@ export class TrainingLandingComponent {
       return this.strapi
         .client()
         .collection('courses')
-        .find()
+        .find({
+          sort: ['startDate:desc'],
+        })
         .then((resp) => resp.data);
     },
   });

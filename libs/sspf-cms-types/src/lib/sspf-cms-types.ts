@@ -58,10 +58,14 @@ export type Registration = API.Document & {
   receiptAddress?: Address;
   certificateAddress?: Address;
   remark?: string;
+  foodOption?: FoodOption;
+  foodOptionOther?: string;
+  foodAllergyDetail?: string;
 };
 
 export type Course = API.Document & {
   name?: string;
+  code?: string;
   stratDate?: Date;
   endDate?: Date;
   fee?: number;
@@ -118,7 +122,10 @@ export type RegisterStatus =
   | 'PAYMENT_RECEIVED'
   | 'ENROLLED'
   | 'WAIT_LIST'
+  | 'WAIT_LIST_OPEN'
   | 'CANCELLED';
+
+export type FoodOption = 'GENERAL' | 'MUSLIM' | 'VEGETARIAN' | 'OTHER';
 
 export type RegisterCount = {
   [key in RegisterStatus]: number | undefined;

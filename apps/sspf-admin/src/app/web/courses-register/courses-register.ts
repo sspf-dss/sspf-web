@@ -24,6 +24,7 @@ import {
   MatDialogActions,
   MatDialogContent,
   MatDialogModule,
+  MatDialogTitle,
   MatDialogRef,
 } from '@angular/material/dialog';
 import { AddressLine } from '../../components/address-line';
@@ -174,10 +175,32 @@ export class CoursesRegister {
       }
     }
   }
+
+  waitListOpen(registration: Registration) {
+    const dialogRef = this.dialog.open(RegistrationConfirmationDialog, {
+      data: { registration: registration, dialogType: 'WAIT_LIST_OPEN' },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.strapi
+          .client()
+          .collection('registrations')
+          .update(registration.documentId, { registerStatus: 'WAIT_LIST_OPEN' })
+          .then((r) => {
+            registration.registerStatus = 'WAIT_LIST_OPEN';
+            this.sb.open('เปลี่ยนสถานะการจองให้สามารถลงทะเบียนได้แล้ว', 'OK', {
+              duration: 8000,
+            });
+          });
+      }
+    });
+  }
+
   cancelRegistration(registration: Registration) {
     // open confirmation dialog
     const dialogRef = this.dialog.open(RegistrationConfirmationDialog, {
-      data: registration,
+      data: { registration: registration, dialogType: 'CANCEL' },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -232,33 +255,66 @@ export class CoursesRegister {
   selector: 'app-registration-confirm-dialog',
   standalone: true,
   template: `
-    <p mat-dialog-title class="mx-8 mb-0">ยกเลิกการลงทะเบียน</p>
+    <h2 mat-dialog-title>
+      {{ dialogTitle }}
+    </h2>
     <mat-dialog-content>
       <div class="mx-8 mt-0 pt-0">
         <p>
           <span class="font-medium">ชื่อผู้ลงทะเบียน:</span>
-          {{ data.nameOnCertificate }}
+          {{ data.registration.nameOnCertificate }}
         </p>
-        <p><span class="font-medium">Email: </span>{{ data.email }}</p>
+        <p>
+          <span class="font-medium">Email: </span>{{ data.registration.email }}
+        </p>
       </div>
     </mat-dialog-content>
     <mat-dialog-actions>
-      <button matButton (click)="onNoClick()">ไม่ยกเลิก</button>
+      <button matButton (click)="onNoClick()">{{ dialogCancel }}</button>
       <button
         matButton
         class="red-button"
         cdkFocusInitial
         (click)="onYesClick()"
       >
-        ยกเลิก
+        {{ dialogConfirm }}
       </button>
     </mat-dialog-actions>
   `,
-  imports: [CommonModule, MatButtonModule, MatDialogContent, MatDialogActions],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogTitle,
+  ],
 })
-export class RegistrationConfirmationDialog {
+export class RegistrationConfirmationDialog implements OnInit {
   dialogRef = inject(MatDialogRef<RegistrationConfirmationDialog>);
-  data: Registration = inject(MAT_DIALOG_DATA);
+  data: {
+    registration: Registration;
+    dialogType: 'CANCEL' | 'WAIT_LIST_OPEN';
+  } = inject(MAT_DIALOG_DATA);
+
+  dialogTitle = '';
+  dialogConfirm = 'ยืนยัน';
+  dialogCancel = 'ยกเลิก';
+
+  ngOnInit(): void {
+    console.log(this.data.dialogType);
+    switch (this.data.dialogType) {
+      case 'CANCEL':
+        this.dialogTitle = 'ยกเลิกการลงทะเบียน';
+        this.dialogConfirm = 'ยกเลิก';
+        this.dialogCancel = 'ไม่ยกเลิก';
+        break;
+      case 'WAIT_LIST_OPEN':
+        this.dialogTitle = 'เปิดผู้จองให้ลงทะเบียน';
+        this.dialogConfirm = 'ตกลง';
+        this.dialogCancel = 'ไม่ตกลง';
+        break;
+    }
+  }
 
   onNoClick(): void {
     this.dialogRef.close(false);

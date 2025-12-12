@@ -1,3 +1,13 @@
+## 1.3.0 (2025-12-12)
+
+### 🚀 Features
+
+- update index.html structure / add information about food option / revise logic for registration ([4e63726](https://github.com/sspf-dss/sspf-web/commit/4e63726))
+
+### ❤️ Thank You
+
+- dbuaklee
+
 ## 1.2.0 (2025-09-24)
 
 ### 🚀 Features

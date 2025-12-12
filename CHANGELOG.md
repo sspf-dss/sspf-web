@@ -1,3 +1,13 @@
+## 1.3.2 (2025-12-12)
+
+### 🩹 Fixes
+
+- remove json-ld ([90a6c5a](https://github.com/sspf-dss/sspf-web/commit/90a6c5a))
+
+### ❤️ Thank You
+
+- dbuaklee
+
 ## 1.3.1 (2025-12-12)
 
 ### 🩹 Fixes
